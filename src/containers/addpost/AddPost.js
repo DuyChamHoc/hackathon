@@ -146,7 +146,7 @@ export default function AddPost({navigation, route}) {
   useEffect(() => {
     firestore()
       .collection('Feeds')
-      .doc(auth().currentUser.uid)
+      .doc('FeedsRider')
       .get()
       .then(documentSnapshot => {
         setIsExsist(documentSnapshot.exists);
@@ -169,7 +169,7 @@ export default function AddPost({navigation, route}) {
     if (isExsist) {
       firestore()
         .collection('Feeds')
-        .doc(auth().currentUser.uid)
+        .doc('FeedsRider')
         .update({
           feeds: firestore.FieldValue.arrayUnion(data),
         })
@@ -179,7 +179,7 @@ export default function AddPost({navigation, route}) {
     } else {
       firestore()
         .collection('Feeds')
-        .doc(auth().currentUser.uid)
+        .doc('FeedsRider')
         .set({
           feeds: firestore.FieldValue.arrayUnion(data),
         })

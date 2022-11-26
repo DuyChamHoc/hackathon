@@ -272,7 +272,6 @@ export default function SearchFeed() {
       </TouchableOpacity>
     </Modal>
     {/* OVERHERE */}
-    {feed.map((item, index) => (
       <TouchableOpacity
       style={{
         borderWidth: 1,
@@ -353,7 +352,6 @@ export default function SearchFeed() {
               <TouchableOpacity
                 style={{
                   height: 40,
-                  backgroundColor: vehicle !== 'Bike' ? color.green1 : 'white',
                   borderTopRightRadius: 10,
                   borderBottomRightRadius: 10,
                   left: 5,
@@ -369,7 +367,7 @@ export default function SearchFeed() {
                 }}>
                 <Text
                   style={{
-                    color: vehicle !== 'Bike' ? 'white' : color.green1,
+                   
                   }}>
                   Car
                 </Text>
@@ -451,6 +449,7 @@ export default function SearchFeed() {
           </View>
         </TouchableOpacity>
       </Modal>
+      </TouchableOpacity>
       {/* OVERHERE */}
       {feed.map((item, index) => (
         <TouchableOpacity

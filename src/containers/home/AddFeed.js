@@ -5,11 +5,11 @@ import CustomHeader from '../../components/CustomHeader';
 import Icon from 'react-native-vector-icons/EvilIcons';
 import Icon1 from 'react-native-vector-icons/Feather';
 import DatetimePicker from '@react-native-community/datetimepicker';
-export default function AddFeed({navigation,route}) {
+export default function AddFeed({navigation, route}) {
   const [date, setdate] = useState(new Date());
   const [mode, setmode] = useState('date');
   const [show, setShow] = useState(false);
-  const id=route.params.id;
+  const id = route.params.id;
   const [description, setdescription] = useState('');
   const [dateShow, setdateShow] = useState('');
   const [timeShow, settimeShow] = useState('');
@@ -191,7 +191,7 @@ export default function AddFeed({navigation,route}) {
             dateStart: date,
             timeStart: timeShow,
           };
-          navigation.navigate('AddPost', {data: data,id:id});
+          navigation.navigate('AddPost', {data: data, id: id});
         }}
         style={{
           backgroundColor: color.green1,
