@@ -8,6 +8,7 @@ import barnavigation from './barnavigation';
 import AddFeed from '../containers/home/AddFeed';
 import SearchFeed from '../containers/search';
 import DetailFeed from '../containers/home/DetailFeed';
+import Sample from '../containers/home/Sample';
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 export default function AppStack() {
@@ -59,6 +60,13 @@ export default function AppStack() {
       <Stack.Screen
         name="Rate"
         component={Rate}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="Sample"
+        component={Sample}
         options={{
           headerShown: false,
         }}

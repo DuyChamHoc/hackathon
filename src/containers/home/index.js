@@ -558,7 +558,7 @@ export default function Home({navigation}) {
                 marginVertical: 10,
                 left: 15,
               }}>
-              Incoming rides
+              Incoming ride
             </Text>
             <ScrollView style={{marginVertical: 10}}>
               <FlatList
