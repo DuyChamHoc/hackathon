@@ -10,13 +10,14 @@ import {
   ToastAndroid,
   Platform,
 } from 'react-native';
-import React, {useRef, useState} from 'react';
+import React, {useRef, useState, useEffect} from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import Icon2 from 'react-native-vector-icons/Ionicons';
 import Icon3 from 'react-native-vector-icons/MaterialCommunityIcons';
 import Icon4 from 'react-native-vector-icons/Entypo';
 
 import auth from '@react-native-firebase/auth';
+import firestore from '@react-native-firebase/firestore';
 import MapView, {Marker} from 'react-native-maps';
 import MapViewDirections from 'react-native-maps-directions';
 import {GooglePlacesAutocomplete} from 'react-native-google-places-autocomplete';
@@ -140,12 +141,23 @@ export default function AddPost({navigation, route}) {
       setIsShowChooseLocation(false);
     }
   };
+  const [isExsist, setIsExsist] = useState(true);
+  useEffect(() => {
+    firestore()
+      .collection('Feeds')
+      .doc(auth().currentUser.uid)
+      .get()
+      .then(documentSnapshot => {
+        setIsExsist(documentSnapshot.exists);
+      });
+  });
   const handleDone = () => {
     let data = {
       _useruid: auth().currentUser.uid,
       origin: origin,
       destination: destination,
-      date: itemData.date,
+      dateStart: itemData.dateStart,
+      timeStart: itemData.timeStart,
       description: itemData.description,
       vehicle: isChooseBike ? 'Bike' : 'Car',
       numPeople: isChooseBike ? 1 : numPeople,
@@ -153,7 +165,27 @@ export default function AddPost({navigation, route}) {
       destinationName: destinationName,
       originName: name,
     };
-    console.log(data);
+    if (isExsist) {
+      firestore()
+        .collection('Feeds')
+        .doc(auth().currentUser.uid)
+        .update({
+          feeds: firestore.FieldValue.arrayUnion(data),
+        })
+        .then(() => {
+          console.log('Post added!xxx');
+        });
+    } else {
+      firestore()
+        .collection('Feeds')
+        .doc(auth().currentUser.uid)
+        .set({
+          feeds: firestore.FieldValue.arrayUnion(data),
+        })
+        .then(() => {
+          console.log('Post added!');
+        });
+    }
   };
   const handleBack = () => {
     setIsShowChooseLocation(true);

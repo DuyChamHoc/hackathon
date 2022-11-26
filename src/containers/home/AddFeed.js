@@ -3,7 +3,7 @@ import {View, Text, TextInput, TouchableOpacity} from 'react-native';
 import {color} from '../../assets/colors/color';
 import CustomHeader from '../../components/CustomHeader';
 import Icon from 'react-native-vector-icons/EvilIcons';
-import Icon1 from "react-native-vector-icons/Feather"
+import Icon1 from 'react-native-vector-icons/Feather';
 import DatetimePicker from '@react-native-community/datetimepicker';
 export default function AddFeed({navigation}) {
   const [date, setdate] = useState(new Date());
@@ -12,10 +12,12 @@ export default function AddFeed({navigation}) {
 
   const [description, setdescription] = useState('');
   const [dateShow, setdateShow] = useState('');
+  const [timeShow, settimeShow] = useState('');
   const formatDayShow = day => {
     if (day != '') {
       return (
-        day.split('-')[2] +
+        Number(day.split('-')[2]) +
+        1 +
         ' tháng ' +
         day.split('-')[1] +
         ' năm ' +
@@ -28,9 +30,14 @@ export default function AddFeed({navigation}) {
     const currentDate = selectedDate || date;
     setShow(false);
     setdate(currentDate);
-    const temp = date.toISOString().split('T')[0];
+
+    const temp = currentDate.toISOString().split('T')[0];
     setdateShow(formatDayShow(temp));
   };
+  const onChangeTime = (event, selectedTime) => {
+    setShow(false);
+   settimeShow(selectedTime.toLocaleTimeString());
+};
   const showMode = currentMode => {
     setShow(true);
     setmode(currentMode);
@@ -41,7 +48,7 @@ export default function AddFeed({navigation}) {
   };
   const showTimepicker = () => {
     showMode('time');
-  }
+  };
   return (
     <View>
       <CustomHeader />
@@ -124,7 +131,7 @@ export default function AddFeed({navigation}) {
             mode={mode}
             is24Hour={true}
             display="default"
-            onChange={onChange}
+            onChange={mode === 'date' ? onChange : onChangeTime}
           />
         )}
       </TouchableOpacity>
@@ -160,6 +167,7 @@ export default function AddFeed({navigation}) {
         <TextInput
           placeholder="Your desparture time"
           selectTextOnFocus={false}
+          value={timeShow}
           editable={false}
           style={{
             width: '95%',
@@ -177,7 +185,8 @@ export default function AddFeed({navigation}) {
         onPress={() => {
           const data = {
             description: description,
-            date: date,
+            dateStart: date,
+            timeStart: timeShow,
           };
           navigation.navigate('AddPost', {data: data});
         }}
