@@ -1,7 +1,16 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text, TouchableOpacity, StyleSheet, Image} from 'react-native';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  Image,
+  ScrollView,
+} from 'react-native';
 import {color} from '../../assets/colors/color';
 import Icon from 'react-native-vector-icons/Ionicons';
+import Icon1 from 'react-native-vector-icons/AntDesign';
+import PostItem from '../../components/postItem';
 
 export default function Home() {
   const [tab, setTab] = useState(0);
@@ -105,18 +114,29 @@ export default function Home() {
             flexDirection: 'row',
             alignItems: 'center',
             justifyContent: 'space-between',
-            marginHorizontal: 40,
+            marginHorizontal: 10,
           }}>
-          <View>
+          <View style={{alignItems: 'center', justifyContent: 'center'}}>
             <View
-              style={{backgroundColor: 'white', height: 35, width: 35,justifyContent:"center",alignItems:"center",borderRadius:17.5}}>
-                <Image
-                  source={require('../../assets/image/request.png')}
-                  style={{width: 25, height: 25}}
-                />
-              </View>
+              style={{
+                backgroundColor: 'white',
+                height: 35,
+                width: 35,
+                justifyContent: 'center',
+                alignItems: 'center',
+                borderRadius: 17.5,
+              }}>
+              <Image
+                source={require('../../assets/image/request.png')}
+                style={{width: 25, height: 25}}
+              />
+            </View>
+            <Text
+              style={{textAlign: 'center', color: 'white', fontWeight: '700'}}>
+              All requests
+            </Text>
           </View>
-          <View
+          <TouchableOpacity
             style={{
               backgroundColor: 'white',
               height: 140,
@@ -132,14 +152,67 @@ export default function Home() {
                 height: 115,
                 width: 115,
                 borderRadius: 57.5,
-              }}></View>
-          </View>
-          <View>
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}>
+              <View
+                style={{
+                  backgroundColor: 'white',
+                  height: 35,
+                  width: 35,
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  borderRadius: 17.5,
+                }}>
+                <Icon1 name="like2" size={25} color="black" />
+              </View>
+              <Text
+                style={{
+                  textAlign: 'center',
+                  color: 'white',
+                  fontWeight: '700',
+                  fontSize: 16,
+                  top: 8,
+                }}>
+                All feed
+              </Text>
+            </View>
+          </TouchableOpacity>
+          <View style={{alignItems: 'center', justifyContent: 'center'}}>
             <View
-              style={{backgroundColor: 'white', height: 20, width: 20}}></View>
+              style={{
+                backgroundColor: 'white',
+                height: 35,
+                width: 35,
+                justifyContent: 'center',
+                alignItems: 'center',
+                borderRadius: 17.5,
+              }}>
+              <Image
+                source={require('../../assets/image/request.png')}
+                style={{width: 25, height: 25}}
+              />
+            </View>
+            <Text
+              style={{textAlign: 'center', color: 'white', fontWeight: '700'}}>
+              All requests
+            </Text>
           </View>
         </View>
       </View>
+      <Text
+        style={{
+          fontSize: 16,
+          fontWeight: '700',
+          color: 'black',
+          marginTop: 30,
+          left: 15,
+        }}>
+        Icoming rides
+      </Text>
+      <ScrollView style={{marginVertical:10}}>
+        <PostItem/>
+      </ScrollView>
     </View>
   );
 }

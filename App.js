@@ -5,23 +5,21 @@ import RootNavigator from './src/navigation/rootNavigation';
 import {LogBox} from 'react-native';
 import {SignInContextProvider} from './src/contexts/authContext';
 import Home from './src/containers/home';
+import AddFeed from './src/containers/home/AddFeed';
 LogBox.ignoreLogs(['new NativeEventEmitter']); // Ignore log notification by message
 LogBox.ignoreAllLogs(); //Ignore all log notifications
 
 export default function App() {
   return (
-    // <SignInContextProvider>
-    //   <View style={styles.container}>
-    //     <StatusBar
-    //       barStyle="light-content"
-    //       backgroundColor={colors.statusbar}
-    //     />
-    //     <RootNavigator />
-    //   </View>
-    // </SignInContextProvider>
-    <View>
-      <Home/>
-    </View>
+    <SignInContextProvider>
+      <View style={styles.container}>
+        <StatusBar
+          barStyle="light-content"
+          backgroundColor={colors.statusbar}
+        />
+        <RootNavigator />
+      </View>
+    </SignInContextProvider>
   );
 }
 
