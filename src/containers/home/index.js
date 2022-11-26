@@ -109,8 +109,11 @@ export default function Home() {
           }}>
           <View>
             <View
-              style={{backgroundColor: 'white', height: 35, width: 35}}>
-
+              style={{backgroundColor: 'white', height: 35, width: 35,justifyContent:"center",alignItems:"center",borderRadius:17.5}}>
+                <Image
+                  source={require('../../assets/image/request.png')}
+                  style={{width: 25, height: 25}}
+                />
               </View>
           </View>
           <View
