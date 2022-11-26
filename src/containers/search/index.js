@@ -51,6 +51,25 @@ export default function SearchFeed() {
     });
   }, [tab]);
 
+  // useEffect(() => {
+  //   const docname = (tab === 0) ? 'FeedsRider' : 'FeedsHitch'
+  //   firestore().collection('Feeds').doc(docname).get().then(querySnapshot => {
+  //     var data = []
+  //     if (querySnapshot.exists) {
+  //       querySnapshot.data().feeds.forEach(item => {
+  //         firestore().collection('Users').doc(item._useruid).get().then(profileSnapshot => {
+  //           if (profileSnapshot.exists) {
+  //             data.push({...item, username: profileSnapshot.data().full_name})
+  //           }
+  //           else data.push({...item, username: ""})
+  //         })
+  //       })
+  //       setFeed(data);
+  //     }
+  //     setIsLoading(false);
+  //   });
+  // }, [tab]);
+
   if (isLoading) 
   return (<View><Text>Loading</Text></View>)
 
@@ -351,7 +370,7 @@ export default function SearchFeed() {
         <View>
           <View style={{flexDirection: 'row', marginTop: 10}}>
             <Text style={{fontSize: 15, fontWeight: '700', color: 'black'}}>
-              {console.log(index)}
+              {console.log(item)}
             </Text>
           </View>
           <Text>2 hour ago</Text>
