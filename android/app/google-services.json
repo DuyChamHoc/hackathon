@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "98238674164",
+    "project_id": "serious-29395",
+    "storage_bucket": "serious-29395.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:98238674164:android:4d3d2b1f6c3644f8dd1aa1",
+        "android_client_info": {
+          "package_name": "com.serious"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "98238674164-urf3dl5a63k4apui9ssd20qiaq0iial6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB3X9HWLdQb21QC2xxZO91OCs3SezxjmNo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "98238674164-urf3dl5a63k4apui9ssd20qiaq0iial6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
