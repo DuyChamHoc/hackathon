@@ -3,15 +3,33 @@ import {View, Text, TextInput, TouchableOpacity} from 'react-native';
 import {color} from '../../assets/colors/color';
 import CustomHeader from '../../components/CustomHeader';
 import Icon from 'react-native-vector-icons/EvilIcons';
+import Icon1 from "react-native-vector-icons/Feather"
 import DatetimePicker from '@react-native-community/datetimepicker';
-export default function AddFeed() {
+export default function AddFeed({navigation}) {
   const [date, setdate] = useState(new Date());
   const [mode, setmode] = useState('date');
   const [show, setShow] = useState(false);
+
+  const [description, setdescription] = useState('');
+  const [dateShow, setdateShow] = useState('');
+  const formatDayShow = day => {
+    if (day != '') {
+      return (
+        day.split('-')[2] +
+        ' tháng ' +
+        day.split('-')[1] +
+        ' năm ' +
+        day.split('-')[0]
+      );
+    }
+    return '';
+  };
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate || date;
     setShow(false);
     setdate(currentDate);
+    const temp = date.toISOString().split('T')[0];
+    setdateShow(formatDayShow(temp));
   };
   const showMode = currentMode => {
     setShow(true);
@@ -21,6 +39,9 @@ export default function AddFeed() {
   const showDatepicker = () => {
     showMode('date');
   };
+  const showTimepicker = () => {
+    showMode('time');
+  }
   return (
     <View>
       <CustomHeader />
@@ -48,7 +69,65 @@ export default function AddFeed() {
           marginVertical: 30,
         }}
         multiline={true}
+        value={description}
+        onChangeText={text => setdescription(text)}
       />
+      <Text
+        style={{
+          fontSize: 18,
+          fontWeight: '600',
+          color: color.green1,
+          left: 15,
+        }}>
+        Departure date
+      </Text>
+      <TouchableOpacity
+        style={{
+          flexDirection: 'row',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+        onPress={showDatepicker}>
+        <Icon
+          name="calendar"
+          size={30}
+          color="black"
+          onPress={showDatepicker}
+          style={{
+            position: 'absolute',
+            bottom: 45,
+            justifyContent: 'flex-end',
+            right: 0,
+            marginRight: 25,
+          }}
+        />
+        <TextInput
+          placeholder="Your desparture date"
+          selectTextOnFocus={false}
+          editable={false}
+          value={dateShow}
+          style={{
+            width: '95%',
+            borderWidth: 1,
+            borderColor: color.gray,
+            height: 50,
+            padding: 15,
+            alignSelf: 'center',
+            borderRadius: 15,
+            marginVertical: 30,
+          }}
+        />
+        {show && (
+          <DatetimePicker
+            testID="dateTimePicker"
+            value={date}
+            mode={mode}
+            is24Hour={true}
+            display="default"
+            onChange={onChange}
+          />
+        )}
+      </TouchableOpacity>
       <Text
         style={{
           fontSize: 18,
@@ -64,12 +143,12 @@ export default function AddFeed() {
           alignItems: 'center',
           justifyContent: 'center',
         }}
-        onPress={showDatepicker}>
-        <Icon
-          name="calendar"
+        onPress={showTimepicker}>
+        <Icon1
+          name="clock"
           size={30}
           color="black"
-          onPress={showDatepicker}
+          onPress={showTimepicker}
           style={{
             position: 'absolute',
             bottom: 45,
@@ -93,18 +172,15 @@ export default function AddFeed() {
             marginVertical: 30,
           }}
         />
-        {show && (
-          <DatetimePicker
-            testID="dateTimePicker"
-            value={date}
-            mode={mode}
-            is24Hour={true}
-            display="default"
-            onChange={onChange}
-          />
-        )}
       </TouchableOpacity>
       <TouchableOpacity
+        onPress={() => {
+          const data = {
+            description: description,
+            date: date,
+          };
+          navigation.navigate('AddPost', {data: data});
+        }}
         style={{
           backgroundColor: color.green1,
           height: 50,
