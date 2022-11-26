@@ -79,7 +79,7 @@ export default function Home({navigation}) {
     componentDidMount();
   }, []);
   const [tab, setTab] = useState(0);
-  const ListItem = ({item}) => {
+  const ListItemRider = ({item}) => {
     return (
       <View>
         <TouchableOpacity
@@ -131,6 +131,63 @@ export default function Home({navigation}) {
                 <Text style={{width: 115, left: 5}}>
                   27/07/2022, 1dddddddddddddddddddddd
                 </Text>
+              </View>
+            </View>
+          </View>
+        </TouchableOpacity>
+      </View>
+    );
+  };
+  const ListItemHitch = ({item}) => {
+    return (
+      <View>
+        <TouchableOpacity
+          style={{
+            borderWidth: 1,
+            borderRadius: 10,
+            borderColor: '#6CC165',
+            marginHorizontal: 10,
+            padding: 10,
+            marginTop: 5,
+            backgroundColor: 'white',
+          }}>
+          <View style={{flexDirection: 'row', right: 10}}>
+            <Image
+              source={require('../../assets/image/avatar.jpg')}
+              style={{width: 60, height: 60, borderRadius: 30}}
+            />
+            <View>
+              <View style={{flexDirection: 'row', marginTop: 10}}>
+                <Text
+                  style={{
+                    fontSize: 15,
+                    fontWeight: '700',
+                    color: 'black',
+                  }}>
+                  Nguyen Van A
+                </Text>
+              </View>
+              <Text>2 hour ago</Text>
+            </View>
+            <View></View>
+          </View>
+          <View style={{flexDirection: 'row'}}>
+            <Text style={{width: 190}}>
+              Co chuyen di sang mai tu Quan 1 ve Thu Duc, ai can di nho thi lien
+              he 0123456789
+            </Text>
+            <View style={{left: 10}}>
+              <View style={{flexDirection: 'row'}}>
+                <Icon3 name="calendar" size={25} color="black" />
+                <Text style={{width: 115, left: 5}}>27/07/2022, 10h</Text>
+              </View>
+              <View style={{flexDirection: 'row', marginVertical: 5}}>
+                <Icon3 name="location" size={25} color="black" />
+                <Text style={{left: 5, width: 115}}>27/07/2022, 10h</Text>
+              </View>
+              <View style={{flexDirection: 'row'}}>
+                <Icon2 name="my-location" size={25} color="black" />
+                <Text style={{width: 115, left: 5}}>27/07/2022</Text>
               </View>
             </View>
           </View>
@@ -399,10 +456,10 @@ export default function Home({navigation}) {
               }}>
               Incoming rides
             </Text>
-            <ScrollView style={{marginVertical: 10}}>
+            <ScrollView style={{marginVertical: 10, height: 500}}>
               <FlatList
                 data={getRider}
-                renderItem={({item, index}) => <ListItem item={item} />}
+                renderItem={({item, index}) => <ListItemRider item={item} />}
                 contentContainerStyle={{paddingBottom: 100}}
                 showsVerticalScrollIndicator={false}
               />
@@ -504,57 +561,12 @@ export default function Home({navigation}) {
               Incoming rides
             </Text>
             <ScrollView style={{marginVertical: 10}}>
-              <TouchableOpacity
-                style={{
-                  borderWidth: 1,
-                  borderRadius: 10,
-                  borderColor: '#6CC165',
-                  marginHorizontal: 10,
-                  padding: 10,
-                  marginTop: 5,
-                  backgroundColor: 'white',
-                }}>
-                <View style={{flexDirection: 'row', right: 10}}>
-                  <Image
-                    source={require('../../assets/image/avatar.jpg')}
-                    style={{width: 60, height: 60, borderRadius: 30}}
-                  />
-                  <View>
-                    <View style={{flexDirection: 'row', marginTop: 10}}>
-                      <Text
-                        style={{
-                          fontSize: 15,
-                          fontWeight: '700',
-                          color: 'black',
-                        }}>
-                        Nguyen Van A
-                      </Text>
-                    </View>
-                    <Text>2 hour ago</Text>
-                  </View>
-                  <View></View>
-                </View>
-                <View style={{flexDirection: 'row'}}>
-                  <Text style={{width: 190}}>
-                    Co chuyen di sang mai tu Quan 1 ve Thu Duc, ai can di nho
-                    thi lien he 0123456789
-                  </Text>
-                  <View style={{left: 10}}>
-                    <View style={{flexDirection: 'row'}}>
-                      <Icon3 name="calendar" size={25} color="black" />
-                      <Text style={{width: 115, left: 5}}>27/07/2022, 10h</Text>
-                    </View>
-                    <View style={{flexDirection: 'row', marginVertical: 5}}>
-                      <Icon3 name="location" size={25} color="black" />
-                      <Text style={{left: 5, width: 115}}>27/07/2022, 10h</Text>
-                    </View>
-                    <View style={{flexDirection: 'row'}}>
-                      <Icon2 name="my-location" size={25} color="black" />
-                      <Text style={{width: 115, left: 5}}>27/07/2022</Text>
-                    </View>
-                  </View>
-                </View>
-              </TouchableOpacity>
+              <FlatList
+                data={getHitch}
+                renderItem={({item, index}) => <ListItemHitch item={item} />}
+                contentContainerStyle={{paddingBottom: 100}}
+                showsVerticalScrollIndicator={false}
+              />
             </ScrollView>
           </View>
         )}

@@ -31,6 +31,7 @@ const MAX_DOWNWARD_TRANSLATE_Y = 0;
 const DRAG_THRESHOLD = 50;
 
 export default function AddPost({navigation, route}) {
+  const user = auth().currentUser;
   const itemData = route.params.data;
   const id = route.params.id;
   const currentPos = useSelector(state => state.currentPosition);
@@ -150,6 +151,7 @@ export default function AddPost({navigation, route}) {
   });
   const handleDoneHitch = () => {
     let data = {
+      user: user.displayName,
       _useruid: auth().currentUser.uid,
       origin: origin,
       destination: destination,
@@ -203,6 +205,7 @@ export default function AddPost({navigation, route}) {
   });
   const handleDone = () => {
     let data = {
+      user: user.displayName,
       _useruid: auth().currentUser.uid,
       origin: origin,
       destination: destination,
