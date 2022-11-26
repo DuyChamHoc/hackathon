@@ -6,6 +6,8 @@ import {colors} from '../global/styles';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Icon1 from 'react-native-vector-icons/AntDesign';
 import MyAccountScreen from '../containers/account/MyAccountScreen';
+import AddPost from '../containers/addpost/AddPost';
+import Rate from '../containers/addpost/Rate';
 import barnavigation from './barnavigation';
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -15,6 +17,20 @@ export default function AppStack() {
       <Stack.Screen
         name="Bar"
         component={barnavigation}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="AddPost"
+        component={AddPost}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="Rate"
+        component={Rate}
         options={{
           headerShown: false,
         }}
