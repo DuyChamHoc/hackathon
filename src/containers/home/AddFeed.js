@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, Text, TextInput, TouchableOpacity} from 'react-native';
+import {View, Text, TextInput, TouchableOpacity, Keyboard} from 'react-native';
 import {color} from '../../assets/colors/color';
 import CustomHeader from '../../components/CustomHeader';
 import Icon from 'react-native-vector-icons/EvilIcons';
@@ -80,6 +80,7 @@ export default function AddFeed({navigation}) {
         multiline={true}
         value={description}
         onChangeText={text => setdescription(text)}
+        onEndEditing={() => Keyboard.dismiss()}
       />
       <Text
         style={{
