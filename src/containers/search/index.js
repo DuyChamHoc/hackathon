@@ -41,22 +41,14 @@ export default function SearchFeed() {
   };
 
   useEffect(() => {
-    const subscriber = firestore().collection('Feeds').get().then(querySnapshot => {
+    firestore().collection('Feeds').get().then(querySnapshot => {
       const query = [];
       querySnapshot.forEach(documentSnapshot => {
-        documentSnapshot.data().user.get().then(profileSnapshot => {
-          const usr = profileSnapshot.data().full_name
-          query.push({
-            ...documentSnapshot.data(),
-            username: usr,
-            key: documentSnapshot.id
-          })
-        })
+        query.push(documentSnapshot.data())
       })
       setFeed(query)
       setIsLoading(false);
     });
-    return () => subscriber();
   }, []);
 
   if (isLoading) 
@@ -339,8 +331,8 @@ export default function SearchFeed() {
       </TouchableOpacity>
     </Modal>
     {/* OVERHERE */}
-    {console.log(feed)}
-    <FlatList data={feed} renderItem={({item}) => (
+    {feed.map((item, index) => (
+      {console.log(item)}
       <TouchableOpacity
       style={{
         borderWidth: 1,
@@ -358,7 +350,7 @@ export default function SearchFeed() {
         <View>
           <View style={{flexDirection: 'row', marginTop: 10}}>
             <Text style={{fontSize: 15, fontWeight: '700', color: 'black'}}>
-              {item.username}
+              {item._useruid}
             </Text>
           </View>
           <Text>2 hour ago</Text>
@@ -367,13 +359,12 @@ export default function SearchFeed() {
       </View>
       <View style={{flexDirection: 'row'}}>
         <Text style={{width: 190}}>
-          Co chuyen di sang mai tu Quan 1 ve Thu Duc, ai can di nho thi lien
-          he 0123456789
+          {item.description}
         </Text>
         <View style={{left: 10}}>
           <View style={{flexDirection: 'row'}}>
             <Icon3 name="calendar" size={25} color="black" />
-            <Text style={{width: 115, left: 5}}>27/07/2022, 10h</Text>
+            <Text style={{width: 115, left: 5}}>{item.datestart}</Text>
           </View>
           <View style={{flexDirection: 'row', marginVertical: 5}}>
             <Icon3 name="location" size={25} color="black" />
@@ -388,7 +379,7 @@ export default function SearchFeed() {
         </View>
       </View>
     </TouchableOpacity>
-    )}/>
+    ))}
   </View>
   );
 }
