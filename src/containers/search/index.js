@@ -374,10 +374,10 @@ export default function SearchFeed({navigation}) {
         <View>
           <View style={{flexDirection: 'row', marginTop: 10}}>
             <Text style={{fontSize: 15, fontWeight: '700', color: 'black'}}>
-              {console.log(item)}
+              {item.user}
             </Text>
           </View>
-          <Text>2 hour ago</Text>
+          <Text>{console.log(item)}</Text>
         </View>
         <View></View>
       </View>
@@ -388,16 +388,16 @@ export default function SearchFeed({navigation}) {
         <View style={{left: 10}}>
           <View style={{flexDirection: 'row'}}>
             <Icon3 name="calendar" size={25} color="black" />
-            <Text style={{width: 115, left: 5}}>{item.datestart}</Text>
+            <Text style={{width: 115, left: 5}}>{item.dateStart.toDate().toDateString()}</Text>
           </View>
           <View style={{flexDirection: 'row', marginVertical: 5}}>
             <Icon3 name="location" size={25} color="black" />
-            <Text style={{left: 5, width: 115}}>27/07/2022, 10h</Text>
+            <Text style={{left: 5, width: 115}}>{item.originName}</Text>
           </View>
           <View style={{flexDirection: 'row'}}>
             <Icon2 name="my-location" size={25} color="black" />
             <Text style={{width: 115, left: 5}}>
-              27/07/2022
+              {item.destinationName}
             </Text>
           </View>
         </View>
