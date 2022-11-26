@@ -23,7 +23,7 @@ export default function SearchFeed() {
   const [date, setdate] = useState(new Date());
   const [mode, setmode] = useState('date');
   const [show, setShow] = useState(false);
-  const [feed, setFeed] = useState();
+  const [feed, setFeed] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   const onChange = (event, selectedDate) => {
@@ -41,15 +41,11 @@ export default function SearchFeed() {
   };
 
   useEffect(() => {
-    const docname = (tab == 0) ? 'FeedsRider' : 'FeedsHitch'
+    const docname = (tab === 0) ? 'FeedsRider' : 'FeedsHitch'
     firestore().collection('Feeds').doc(docname).get().then(querySnapshot => {
-      const query = [];
-      // querySnapshot.forEach(documentSnapshot => {
-      //   query.push(documentSnapshot)
-      // })
-      if (querySnapshot !== null) {
-        query.push(querySnapshot.data().feeds)
-        setFeed(query)
+      if (querySnapshot.exists) {
+        const data= querySnapshot.data();
+        setFeed(data.feeds);
       }
       setIsLoading(false);
     });
@@ -364,7 +360,7 @@ export default function SearchFeed() {
       </View>
       <View style={{flexDirection: 'row'}}>
         <Text style={{width: 190}}>
-          {item[index].description}
+          {item.description}
         </Text>
         <View style={{left: 10}}>
           <View style={{flexDirection: 'row'}}>
