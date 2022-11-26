@@ -236,7 +236,8 @@ export default function MyAccountScreen({navigation}) {
             <View style={styles.centeredView}>
               <View
                 style={{
-                  margin: 20,
+                  marginTop: -20,
+                  // margin: 20,
                   backgroundColor: 'white',
                   borderRadius: 20,
                   padding: 35,
@@ -249,7 +250,6 @@ export default function MyAccountScreen({navigation}) {
                   shadowOpacity: 0.25,
                   shadowRadius: 4,
                   elevation: 5,
-                  backgroundColor: colors.background,
                 }}>
                 <TouchableOpacity
                   onPress={() => {
@@ -257,6 +257,9 @@ export default function MyAccountScreen({navigation}) {
                   }}>
                   <Icon1
                     size={20}
+                    onPress={() => {
+                      setModalVisible(!modalVisible);
+                    }}
                     name="close"
                     style={{
                       marginLeft: 265,
@@ -386,14 +389,18 @@ export default function MyAccountScreen({navigation}) {
                 <TouchableOpacity
                   onPress={update}
                   style={{
-                    alignContent: 'center',
+                    alignItems: 'center',
+                    justifyContent: 'center',
                     borderRadius: 20,
                     height: 45,
                     width: 250,
-                    backgroundColor: 'blue',
+                    backgroundColor: color.primarygreen,
                     marginLeft: 8,
                   }}>
-                  <Text style={styles.buttonTitle}>Lưu thông tin</Text>
+                  <Text
+                    style={{color: 'white', fontSize: 16, fontWeight: 'bold'}}>
+                    Save
+                  </Text>
                 </TouchableOpacity>
               </View>
             </View>
@@ -528,9 +535,9 @@ const styles = StyleSheet.create({
     borderWidth: 1,
   },
   viewInfo: {
-    paddingLeft:20,
+    paddingLeft: 20,
     flexDirection: 'row',
-    marginTop: 20,  
+    marginTop: 20,
     alignContent: 'center',
   },
   address: {
