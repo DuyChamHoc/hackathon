@@ -3,7 +3,10 @@ import React from 'react';
 import {  StyleSheet, Text, View,TouchableOpacity,Image } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {color} from '../assets/colors/color';
+import {useNavigation} from '@react-navigation/native';
+
 export default function CustomHeader() {
+  const navigation = useNavigation();
     return(
     <View
     style={{
@@ -22,7 +25,8 @@ export default function CustomHeader() {
         width: 30,
         alignItems: 'center',
         justifyContent: 'center',
-      }}>
+      }}
+      onPress={()=>navigation.goBack()}>
       <Icon name="keyboard-arrow-left" size={25} color={color.green} />
     </TouchableOpacity>
     <View
