@@ -16,7 +16,7 @@ import Icon3 from 'react-native-vector-icons/EvilIcons';
 import DatetimePicker from '@react-native-community/datetimepicker';
 import firestore from '@react-native-firebase/firestore';
 import { FlatList } from 'react-native-gesture-handler';
-export default function SearchFeed() {
+export default function SearchFeed({navigation}) {
   const [tab, setTab] = useState(0);  // 0: rider, 1: hitch
   const [vehicle, setVehicle] = useState('Bike');
   const [modavisible, setModavisible] = useState(false);
@@ -361,7 +361,11 @@ export default function SearchFeed() {
         marginHorizontal: 10,
         padding: 10,
         marginTop: 5,
-      }}>
+      }}
+      onPress={()=>{
+        navigation.navigate('DetailFeed',{item,id});
+      }}
+      >
       <View style={{flexDirection: 'row', right: 10}}>
         <Image
           source={require('../../assets/image/avatar.jpg')}

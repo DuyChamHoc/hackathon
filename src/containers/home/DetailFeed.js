@@ -1,14 +1,38 @@
-import React,{useState} from 'react';
+import React,{useState,useEffect} from 'react';
 import {View, Text, StyleSheet, TouchableOpacity, Image, TextInput, ScrollView} from 'react-native';
 import {color} from '../../assets/colors/color';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Icon1 from 'react-native-vector-icons/Ionicons';
 import Icon2 from "react-native-vector-icons/MaterialIcons"
 import Icon3 from 'react-native-vector-icons/EvilIcons';
-
+import firestore from '@react-native-firebase/firestore'
 export default function DetailFeed({navigation,route}) {
-  const data=route.params;
-  const [comment,setcomment]=useState('')
+  const [comment,setcomment]=useState(false);
+  const [feed,setfeed]=useState([]);
+  useEffect(() => {
+    const data=id===0?'FeedsRider':'FeedsHitch';
+     firestore()
+     .collection('Feeds')
+      .doc(data)
+      get()
+      .then(documentSnapshot => {
+        setfeed(documentSnapshot.data().feeds);
+      })
+  },[])
+  const {data,id}=route.params;
+  const postcomment=()=>{
+    feed.map((item,index)=>{
+      if(item.id===data.id){
+        item.comment.push(data.comment)
+      }
+    })
+    firestore()
+    .collection('Feeds')
+    .doc(id===0?'FeedsRider':'FeedsHitch')
+    .set(
+      feeds:feed
+    )
+  }
   return (
     <ScrollView style={{marginVertical:30}}>
       <View
@@ -29,9 +53,9 @@ export default function DetailFeed({navigation,route}) {
           </TouchableOpacity>
           <View style={{marginTop:5}}>
             <Text style={{fontSize: 17, fontWeight: '700', color: 'black'}}>
-              Nguyen Van A
+              {data.user}
             </Text>
-            <Text style={{fontSize: 14}}>About a day before</Text>
+            <Text style={{fontSize: 14}}></Text>
           </View>
           <TouchableOpacity
             style={{
@@ -54,7 +78,7 @@ export default function DetailFeed({navigation,route}) {
           </TouchableOpacity>
         </View>
         <Text style={{fontSize:15,fontWeight:'500'}}>
-          Co chuyen di sang mai tu Quan 1 ve Thu Duc, ai can di nho thi lien he 0123456789
+          {data.description}
         </Text>
         <View
           style={{
@@ -81,7 +105,7 @@ export default function DetailFeed({navigation,route}) {
                 color: 'black',
                 fontSize: 16,
               }}>
-              Share
+              {data.options}
             </Text>
           </View>
           <View style={{height: 35, borderWidth: 1,borderColor:color.gray}} />
@@ -99,21 +123,21 @@ export default function DetailFeed({navigation,route}) {
               style={{right: 25}}
             />
             <Text style={{fontWeight: 'bold', color: 'black', fontSize: 16}}>
-              Car {'('}2 people{')'}
+              {data.vehicle}{'('}{data.numPeople}{')'}
             </Text>
           </View>
         </View>
         <View style={{flexDirection:"row"}}>
             <Icon3 name="calendar" size={25} color='black' />
-            <Text style={{left:10,fontWeight:'400'}}>27/07/2022, 10h</Text>
+            <Text style={{left:10,fontWeight:'400'}}>{data.dateStart}</Text>
           </View>
           <View style={{flexDirection:"row",marginVertical:10}}>
             <Icon3 name="location" size={25} color="black" />
-            <Text style={{left:10,fontWeight:'400'}}>27/07/2022, 10h</Text>
+            <Text style={{left:10,fontWeight:'400'}}>{data.originName}</Text>
           </View>
           <View style={{flexDirection:"row"}}>
             <Icon2 name="my-location" size={25} color='black' />
-            <Text style={{left:10,fontWeight:'400'}}>27/07/2022, 10h</Text>
+            <Text style={{left:10,fontWeight:'400'}}>{data.destinationName}</Text>
           </View>
           <View style={{borderWidth:0.5,marginTop:30,borderColor:color.gray,width:300,alignSelf:"center"}}/>
           <Text style={{fontWeight:'700',fontSize:18,color:"black",left:8,marginVertical:20}}>Comments</Text>
@@ -123,6 +147,7 @@ export default function DetailFeed({navigation,route}) {
               source={require('../../assets/image/avatar.jpg')}
               style={{width: 60, height: 60, borderRadius: 30}}
             />
+            {feed,map}
             <View>
             <View style={{flexDirection:"row",justifyContent:"space-between",marginTop:5}}>
             <Text style={{fontSize: 15, fontWeight: '700', color: 'black'}}>
@@ -137,7 +162,7 @@ export default function DetailFeed({navigation,route}) {
           </View>
           <View style={{marginVertical:30,flexDirection:"row"}}>
             <TextInput
-            onSubmitEditing={()=>{}}
+            onSubmitEditing={()=>{postcomment}}
             placeholder='Write your comment...'
             style={{backgroundColor:color.gray1,marginTop:20,width:"100%",borderRadius:10}}
             value={comment}
