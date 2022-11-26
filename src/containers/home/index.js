@@ -12,7 +12,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import Icon1 from 'react-native-vector-icons/AntDesign';
 import PostItem from '../../components/postItem';
 
-export default function Home() {
+export default function Home({navigation}) {
   const [tab, setTab] = useState(0);
   return (
     <View>
@@ -82,7 +82,11 @@ export default function Home() {
             </Text>
           </TouchableOpacity>
         </View>
-        <TouchableOpacity style={{right: 10}}>
+        <TouchableOpacity
+          style={{right: 10}}
+          onPress={() => {
+            navigation.navigate('myaccount');
+          }}>
           <Image
             source={require('../../assets/image/avatar.jpg')}
             style={{width: 45, height: 45, borderRadius: 25, marginLeft: 10}}
@@ -210,8 +214,8 @@ export default function Home() {
         }}>
         Icoming rides
       </Text>
-      <ScrollView style={{marginVertical:10}}>
-        <PostItem/>
+      <ScrollView style={{marginVertical: 10}}>
+        <PostItem />
       </ScrollView>
     </View>
   );

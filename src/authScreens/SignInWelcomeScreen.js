@@ -2,30 +2,23 @@ import React, {useEffect, useContext} from 'react';
 import {View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
 import {colors, parameters} from '../global/styles';
 import Swiper from 'react-native-swiper';
-import {SignInContext} from '../../contexts/authContext';
-// import auth from '@react-native-firebase/auth';
-// import firestore from '@react-native-firebase/firestore';
+import {SignInContext} from '../contexts/authContext';
+import auth from '@react-native-firebase/auth';
 
 export default function SignInWelcomeScreen({navigation}) {
-  // const {dispatchSignedIn} = useContext(SignInContext);
-  // useEffect(() => {
-  //   auth().onAuthStateChanged(user => {
-  //     if (user) {
-  //       firestore()
-  //         .collection('Users')
-  //         .doc(user.uid)
-  //         .get()
-  //         .then(documentSnapshot => {
-  //           dispatchSignedIn({
-  //             type: 'UPDATE_SIGN_IN',
-  //             payload: {userToken: documentSnapshot.data().roll},
-  //           });
-  //         });
-  //     } else {
-  //       dispatchSignedIn({type: 'UPDATE_SIGN_IN', payload: {userToken: null}});
-  //     }
-  //   });
-  // }, []);
+  const {dispatchSignedIn} = useContext(SignInContext);
+  useEffect(() => {
+    auth().onAuthStateChanged(user => {
+      if (user) {
+        dispatchSignedIn({
+          type: 'UPDATE_SIGN_IN',
+          payload: {userToken: 'signed-in'},
+        });
+      } else {
+        dispatchSignedIn({type: 'UPDATE_SIGN_IN', payload: {userToken: null}});
+      }
+    });
+  }, []);
   return (
     <View style={{flex: 1, backgroundColor: 'white'}}>
       <View style={{}}>

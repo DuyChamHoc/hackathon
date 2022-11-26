@@ -1,25 +1,24 @@
 import React from 'react';
-import SignInScreen from '../authScreens/SignInScreen';
-import SignInWelcomeScreen from '../authScreens/SignInWelcomeScreen';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import Home from '../containers/home';
+import {colors} from '../global/styles';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon1 from 'react-native-vector-icons/AntDesign';
+import MyAccountScreen from '../containers/account/MyAccountScreen';
+import barnavigation from './barnavigation';
 const Tab = createBottomTabNavigator();
+const Stack = createNativeStackNavigator();
 export default function AppStack() {
   return (
-    <Tab.Navigator>
-      <Tab.Screen
-        name="SignInScreen"
-        component={SignInScreen}
+    <Stack.Navigator>
+      <Stack.Screen
+        name="Bar"
+        component={barnavigation}
         options={{
           headerShown: false,
         }}
       />
-      <Tab.Screen
-        name="SignInWelcomeScreen"
-        component={SignInWelcomeScreen}
-        options={{
-          headerShown: false,
-        }}
-      />
-    </Tab.Navigator>
+    </Stack.Navigator>
   );
 }

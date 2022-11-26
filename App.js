@@ -5,8 +5,8 @@ import RootNavigator from './src/navigation/rootNavigation';
 import {LogBox} from 'react-native';
 import {SignInContextProvider} from './src/contexts/authContext';
 import Home from './src/containers/home';
-import AddFeed from './src/containers/home/DetailFeed';
-import DetailFeed from './src/containers/home/DetailFeed';
+import AddFeed from './src/containers/home/AddFeed';
+import { color } from './src/assets/colors/color';
 LogBox.ignoreLogs(['new NativeEventEmitter']); // Ignore log notification by message
 LogBox.ignoreAllLogs(); //Ignore all log notifications
 
@@ -16,7 +16,7 @@ export default function App() {
       <View style={styles.container}>
         <StatusBar
           barStyle="light-content"
-          backgroundColor={colors.statusbar}
+          backgroundColor={color.primarygreen}
         />
         <RootNavigator />
       </View>
