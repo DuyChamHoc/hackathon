@@ -7,6 +7,7 @@ import {
   Image,
   ScrollView,
 } from 'react-native';
+import Swiper from "react-native-swiper"
 import {color} from '../../assets/colors/color';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Icon2 from 'react-native-vector-icons/MaterialIcons';
@@ -95,12 +96,40 @@ export default function Home({navigation}) {
       </View>
       {tab === 0 ? (
         <View>
-          <TouchableOpacity style={{alignItems: 'center'}}>
+           <Swiper autoplay={true} style={{marginTop: 5}}>
+          <View style={styles.slide1}>
             <Image
-              source={require('../../assets/image/advertise.png')}
-              style={{width: 350}}
+              source={{
+                uri: 'https://t3.ftcdn.net/jpg/02/94/77/98/360_F_294779803_HfpHnLilMfD38zD8mHK0H7N2gbdBD9TK.jpg',
+              }}
+              style={{height: '100%', width: '100%'}}
             />
-          </TouchableOpacity>
+          </View>
+          <View style={styles.slide2}>
+            <Image
+              source={{
+                uri: 'https://cdn.dribbble.com/users/221637/screenshots/12282529/rider_4x.gif?compress=1&resize=400x300',
+              }}
+              style={{height: '100%', width: '100%'}}
+            />
+          </View>
+          <View style={styles.slide3}>
+            <Image
+              source={{
+                uri: 'https://media.istockphoto.com/id/1315202286/vector/rider-motorbike-taxi-online-with-profile-rating-and-gps-symbol-set-cartoon-illustration.jpg?s=612x612&w=0&k=20&c=Cmm3iqz9Uy3xphFDQiDnOqciPYe9xOLLwjnwiKfe3no=',
+              }}
+              style={{height: '100%', width: '100%'}}
+            />
+          </View>
+          <View style={styles.slide3}>
+            <Image
+              source={{
+                uri: 'https://assets.grab.com/wp-content/uploads/sites/11/2019/08/01200400/Mother_Car.png',
+              }}
+              style={{height: '100%', width: '100%'}}
+            />
+          </View>
+        </Swiper>
           <Text
             style={{
               fontSize: 16,
