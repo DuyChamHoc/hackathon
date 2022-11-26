@@ -4,6 +4,7 @@ import {colors, parameters} from '../global/styles';
 import Swiper from 'react-native-swiper';
 import {SignInContext} from '../contexts/authContext';
 import auth from '@react-native-firebase/auth';
+import {color} from '../assets/colors/color';
 
 export default function SignInWelcomeScreen({navigation}) {
   const {dispatchSignedIn} = useContext(SignInContext);
@@ -29,9 +30,9 @@ export default function SignInWelcomeScreen({navigation}) {
             textAlign: 'center',
             fontWeight: 'bold',
             marginTop: 30,
-            color: colors.welcome,
+            color: color.primarygreen,
           }}>
-          ORDER MEDICINE TODAY, HEALTH TOMORROW
+          GREENHITCH
         </Text>
       </View>
       <View style={{flex: 8, justifyContent: 'center', marginTop: 30}}>
@@ -68,31 +69,20 @@ export default function SignInWelcomeScreen({navigation}) {
             marginLeft: 30,
             marginTop: 20,
             fontWeight: 'bold',
-            color: colors.welcome,
+            color: color.primarygreenop,
             fontSize: 32,
           }}>
           Welcome!
         </Text>
         <Text style={{marginLeft: 30, fontSize: 20, color: colors.black}}>
-          Create an account or log in to order medicine right on
-        </Text>
-        <Text
-          style={{
-            marginLeft: 174,
-            marginTop: -27,
-            fontSize: 20,
-            fontWeight: 'bold',
-            color: colors.black,
-          }}>
-          MEDELI
+          Create an account or log in
         </Text>
       </View>
       <View
         style={{
           flex: 4,
           marginBottom: 20,
-          marginTop: 10,
-          justifyContent: 'flex-end',
+          marginTop: 60,
         }}>
         <View style={{marginHorizontal: 20, marginLeft: 12}}>
           <TouchableOpacity
@@ -105,11 +95,11 @@ export default function SignInWelcomeScreen({navigation}) {
         </View>
         <View style={{marginHorizontal: 20, marginTop: 15, marginLeft: 12}}>
           <TouchableOpacity
-            style={parameters.createButton}
+            style={styles.createButton}
             onPress={() => {
               navigation.navigate('SignUpScreen');
             }}>
-            <Text style={parameters.createButtonTittle}>Sign up</Text>
+            <Text style={styles.createButtonTittle}>Sign up</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -138,16 +128,17 @@ const styles = StyleSheet.create({
   },
   createButton: {
     backgroundColor: 'white',
-    alignContent: 'center',
+    alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 25,
     borderWidth: 1,
     borderColor: '#1db0e3',
     height: 50,
     paddingHorizontal: 20,
-    borderColor: colors.buttons,
+    borderColor: color.primarygreenop,
     width: 300,
     marginLeft: 32,
+    marginTop: 20,
   },
   createButtonTittle: {
     color: colors.grey1,

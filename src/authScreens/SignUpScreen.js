@@ -18,6 +18,7 @@ import * as Animatable from 'react-native-animatable';
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 import DatetimePicker from '@react-native-community/datetimepicker';
+import {color} from '../assets/colors/color';
 
 const SignUpScreen = ({navigation}) => {
   const [passwordFocussed, setPasswordFocussed] = useState(false);
@@ -81,7 +82,9 @@ const SignUpScreen = ({navigation}) => {
         <View style={styles.view1}></View>
         <View style={styles.view2}>
           <View>
-            <Text style={styles.text2}>Create new account with MEDELI ?</Text>
+            <Text style={styles.text2}>
+              Create new account with GREENHITCH ?
+            </Text>
           </View>
           <View style={styles.view6}>
             <TextInput
@@ -211,7 +214,7 @@ const SignUpScreen = ({navigation}) => {
         <View style={styles.view19}>
           <View style={styles.view20}>
             <Text style={{color: colors.grey1}}>
-              You are ready to create an account with MEDELI ?
+              You are ready to create an account with GREENHITCH ?
             </Text>
           </View>
           <View style={[styles.view21, {marginTop: 16}]}>
@@ -367,8 +370,8 @@ const styles = StyleSheet.create({
     fontSize: 13,
   },
   button1: {
-    backgroundColor: colors.buttons,
-    alignContent: 'center',
+    backgroundColor: color.primarygreen,
+    alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 12,
     borderWidth: 1,
@@ -415,12 +418,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     borderRadius: 12,
     borderWidth: 1,
-    borderColor: colors.backgroundColor,
+    borderColor: color.primarygreen,
     height: 40,
     paddingHorizontal: 20,
   },
   title2: {
-    color: colors.buttons,
+    color: color.primarygreen,
     fontSize: 16,
     fontWeight: 'bold',
     alignItems: 'center',

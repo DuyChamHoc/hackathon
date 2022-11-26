@@ -13,7 +13,7 @@ export default function AppStack() {
   return (
     <Stack.Navigator>
       <Stack.Screen
-        name="Bar"
+        name="BarNavigation"
         component={barnavigation}
         options={{
           headerShown: false,

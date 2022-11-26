@@ -13,6 +13,7 @@ import Icon from 'react-native-vector-icons/Entypo';
 import Icon1 from 'react-native-vector-icons/FontAwesome';
 import Icon2 from 'react-native-vector-icons/MaterialCommunityIcons';
 import Icon3 from 'react-native-vector-icons/MaterialIcons';
+import Icon4 from 'react-native-vector-icons/AntDesign';
 import Header from '../components/Header';
 import * as Animatable from 'react-native-animatable';
 import {Formik} from 'formik';
@@ -20,6 +21,7 @@ import {SignInContext} from '../contexts/authContext';
 import auth, {firebase} from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
+import {color} from '../assets/colors/color';
 
 GoogleSignin.configure({
   webClientId:
@@ -84,7 +86,7 @@ export default function SignInScreen({navigation}) {
       <View style={styles.container}>
         <Header title="LOGIN" type="arrow-left" navigation={navigation} />
         <View style={{marginLeft: 20, marginTop: 10}}></View>
-        <View style={{alignItems: 'center', marginTop: 10}}>
+        <View style={{alignItems: 'center', marginTop: 20}}>
           <Text style={styles.text1}>Log in to your account</Text>
         </View>
         <Formik
@@ -94,13 +96,15 @@ export default function SignInScreen({navigation}) {
           }}>
           {props => (
             <View>
-              <View style={{marginTop: 20}}>
+              <View style={{marginTop: 30}}>
                 <View style={styles.textinput2}>
                   <Icon2 name="email" size={20} />
                   <TextInput
                     placeholder="Email"
                     ref={textinput1}
-                    style={{width: '90%'}}
+                    style={{
+                      width: '90%',
+                    }}
                     onChangeText={props.handleChange('email')}
                     value={props.values.email}
                     autoCapitalize="none"
@@ -133,6 +137,7 @@ export default function SignInScreen({navigation}) {
                     <Icon3
                       name={getVisible ? 'visibility' : 'visibility-off'}
                       size={20}
+                      style={{marginRight: 10}}
                       onPress={() => {
                         setVisible(!getVisible);
                       }}
@@ -141,7 +146,7 @@ export default function SignInScreen({navigation}) {
                 </View>
               </View>
 
-              <View style={{marginHorizontal: 20, marginTop: 10}}>
+              <View style={{marginHorizontal: 20, marginTop: 30}}>
                 <TouchableOpacity
                   style={styles.styledButton}
                   onPress={props.handleSubmit}>
@@ -165,13 +170,26 @@ export default function SignInScreen({navigation}) {
           <Text style={{fontSize: 20, fontWeight: 'bold'}}>OR</Text>
         </View>
 
-        <View style={{marginHorizontal: 10, marginTop: 0}}>
+        <View style={{marginHorizontal: 20, marginTop: 0}}>
           <TouchableOpacity
-            style={styles.SocialIcon}
+            style={{
+              backgroundColor: '#CD201F',
+              alignItems: 'center',
+              justifyContent: 'center',
+              borderRadius: 12,
+              height: 50,
+              paddingHorizontal: 20,
+              width: '100%',
+              marginBottom: 20,
+              flexDirection: 'row',
+            }}
             onPress={() => {
               onGoogleButtonPress();
             }}>
-            <Text>Login with Google</Text>
+            <Icon4 name="google" size={30} style={{marginRight: 15}} />
+            <Text style={{fontSize: 18, fontWeight: 'bold', color: 'white'}}>
+              Login with Google
+            </Text>
           </TouchableOpacity>
         </View>
 
@@ -179,7 +197,8 @@ export default function SignInScreen({navigation}) {
           <Text style={{...styles.text1}}> No account ? </Text>
         </View>
 
-        <View style={{alignItems: 'flex-end', marginHorizontal: 20}}>
+        <View
+          style={{alignItems: 'flex-end', marginHorizontal: 20, marginTop: 40}}>
           <TouchableOpacity
             style={styles.createButton}
             onPress={() => {
@@ -251,8 +270,9 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
   },
   text1: {
-    color: colors.grey2,
-    fontSize: 16,
+    color: 'black',
+    fontSize: 20,
+    fontWeight: 'bold',
   },
   textinput1: {
     borderWidth: 1,
@@ -276,13 +296,13 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 12,
     marginHorizontal: 20,
-    borderColor: '#86939e',
+    borderColor: '#097210',
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignContent: 'center',
     alignItems: 'center',
     paddingLeft: 15,
-    marginBottom: 17,
+    marginBottom: 30,
   },
   SocialIcon: {
     borderRadius: 12,
@@ -294,12 +314,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     borderRadius: 12,
     borderWidth: 1,
-    borderColor: '#1db0e3',
+    borderColor: color.primarygreen,
     height: 40,
     paddingHorizontal: 20,
   },
   createButtonTittle: {
-    color: '#1db0e3',
+    color: color.primarygreen,
     fontSize: 16,
     fontWeight: 'bold',
     alignItems: 'center',
@@ -307,8 +327,8 @@ const styles = StyleSheet.create({
     marginTop: -3,
   },
   styledButton: {
-    backgroundColor: '#6BC8FF',
-    alignContent: 'center',
+    backgroundColor: '#097210',
+    alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 12,
     borderWidth: 1,
@@ -316,6 +336,7 @@ const styles = StyleSheet.create({
     height: 50,
     paddingHorizontal: 20,
     width: '100%',
+    marginBottom: 20,
   },
 
   buttonTitle: {
