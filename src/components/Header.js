@@ -3,6 +3,7 @@ import {View, Text, StyleSheet, Dimensions} from 'react-native';
 import {colors, parameters} from '../global/styles';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import Icon1 from 'react-native-vector-icons/MaterialCommunityIcons';
+import { color } from '../assets/colors/color';
 export default function Header({title, type, navigation}) {
   return (
     <View style={styles.header}>
@@ -35,7 +36,7 @@ export default function Header({title, type, navigation}) {
 const styles = StyleSheet.create({
   header: {
     flexDirection: 'row',
-    backgroundColor: colors.buttons,
+    backgroundColor: color.primarygreen,
     height: parameters.headerHeight,
     justifyContent: 'space-between',
   },

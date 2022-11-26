@@ -4,6 +4,7 @@ import {colors, parameters} from '../global/styles';
 import Swiper from 'react-native-swiper';
 import {SignInContext} from '../contexts/authContext';
 import auth from '@react-native-firebase/auth';
+import {color} from '../assets/colors/color';
 
 export default function SignInWelcomeScreen({navigation}) {
   const {dispatchSignedIn} = useContext(SignInContext);
@@ -29,34 +30,42 @@ export default function SignInWelcomeScreen({navigation}) {
             textAlign: 'center',
             fontWeight: 'bold',
             marginTop: 30,
-            color: colors.welcome,
+            color: color.primarygreen,
           }}>
-          ORDER MEDICINE TODAY, HEALTH TOMORROW
+          GREENHITCH
         </Text>
       </View>
       <View style={{flex: 8, justifyContent: 'center', marginTop: 30}}>
         <Swiper autoplay={true} style={{marginTop: 5}}>
           <View style={styles.slide1}>
             <Image
-              source={{uri: 'https://i.imgur.com/ggO0GMB.jpg'}}
+              source={{
+                uri: 'https://t3.ftcdn.net/jpg/02/94/77/98/360_F_294779803_HfpHnLilMfD38zD8mHK0H7N2gbdBD9TK.jpg',
+              }}
               style={{height: '100%', width: '100%'}}
             />
           </View>
           <View style={styles.slide2}>
             <Image
-              source={{uri: 'https://i.imgur.com/oVkw1D7.jpg'}}
+              source={{
+                uri: 'https://cdn.dribbble.com/users/221637/screenshots/12282529/rider_4x.gif?compress=1&resize=400x300',
+              }}
               style={{height: '100%', width: '100%'}}
             />
           </View>
           <View style={styles.slide3}>
             <Image
-              source={{uri: 'https://i.imgur.com/k8JgqLU.jpg'}}
+              source={{
+                uri: 'https://media.istockphoto.com/id/1315202286/vector/rider-motorbike-taxi-online-with-profile-rating-and-gps-symbol-set-cartoon-illustration.jpg?s=612x612&w=0&k=20&c=Cmm3iqz9Uy3xphFDQiDnOqciPYe9xOLLwjnwiKfe3no=',
+              }}
               style={{height: '100%', width: '100%'}}
             />
           </View>
           <View style={styles.slide3}>
             <Image
-              source={{uri: 'https://i.imgur.com/MTBdUBa.jpg'}}
+              source={{
+                uri: 'https://assets.grab.com/wp-content/uploads/sites/11/2019/08/01200400/Mother_Car.png',
+              }}
               style={{height: '100%', width: '100%'}}
             />
           </View>
@@ -68,31 +77,20 @@ export default function SignInWelcomeScreen({navigation}) {
             marginLeft: 30,
             marginTop: 20,
             fontWeight: 'bold',
-            color: colors.welcome,
+            color: color.primarygreenop,
             fontSize: 32,
           }}>
           Welcome!
         </Text>
         <Text style={{marginLeft: 30, fontSize: 20, color: colors.black}}>
-          Create an account or log in to order medicine right on
-        </Text>
-        <Text
-          style={{
-            marginLeft: 174,
-            marginTop: -27,
-            fontSize: 20,
-            fontWeight: 'bold',
-            color: colors.black,
-          }}>
-          MEDELI
+          Create an account or log in
         </Text>
       </View>
       <View
         style={{
           flex: 4,
           marginBottom: 20,
-          marginTop: 10,
-          justifyContent: 'flex-end',
+          marginTop: 60,
         }}>
         <View style={{marginHorizontal: 20, marginLeft: 12}}>
           <TouchableOpacity
@@ -105,11 +103,11 @@ export default function SignInWelcomeScreen({navigation}) {
         </View>
         <View style={{marginHorizontal: 20, marginTop: 15, marginLeft: 12}}>
           <TouchableOpacity
-            style={parameters.createButton}
+            style={styles.createButton}
             onPress={() => {
               navigation.navigate('SignUpScreen');
             }}>
-            <Text style={parameters.createButtonTittle}>Sign up</Text>
+            <Text style={styles.createButtonTittle}>Sign up</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -138,16 +136,17 @@ const styles = StyleSheet.create({
   },
   createButton: {
     backgroundColor: 'white',
-    alignContent: 'center',
+    alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 25,
     borderWidth: 1,
     borderColor: '#1db0e3',
     height: 50,
     paddingHorizontal: 20,
-    borderColor: colors.buttons,
+    borderColor: color.primarygreenop,
     width: 300,
     marginLeft: 32,
+    marginTop: 20,
   },
   createButtonTittle: {
     color: colors.grey1,
