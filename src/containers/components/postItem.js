@@ -1,4 +1,6 @@
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import Icon from 'react-native-vector-icons/EvilIcons';
+import Icon1 from 'react-native-vector-icons/MaterialIcons';
 
 const PostItem = () => {
   return (
@@ -11,15 +13,15 @@ const PostItem = () => {
         <View></View>
         <View>
           <View>
-            <Icon name="location" size={30} color="#900" />
+            <Icon name="calendar" size={30} color="#900" />
             <Text>27/07/2022, 10h</Text>
           </View>
           <View>
-            <Icon name="calendar" type="evilicon" color="black" />
+            <Icon name="location" type="evilicon" color="black" />
             <Text>27/07/2022, 10h</Text>
           </View>
           <View>
-            <Icon name="calendar" type="evilicon" color="black" />
+            <Icon1 name="my-location" size={30} color="#900" />
             <Text>27/07/2022, 10h</Text>
           </View>
         </View>

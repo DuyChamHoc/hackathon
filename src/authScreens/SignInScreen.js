@@ -8,22 +8,21 @@ import {
   Modal,
   TouchableOpacity,
 } from 'react-native';
-import {colors} from '../../global/styles';
-import {Icon, Button, SocialIcon} from 'react-native-elements';
+import {colors} from '../global/styles';
 import Icon1 from 'react-native-vector-icons/FontAwesome';
-import Header from '../../components/Header';
+import Header from '../components/Header';
 import * as Animatable from 'react-native-animatable';
 import {Formik} from 'formik';
-import auth, {firebase} from '@react-native-firebase/auth';
-import firestore from '@react-native-firebase/firestore';
-import {GoogleSignin} from '@react-native-google-signin/google-signin';
-import {SignInContext} from '../../contexts/authContext';
-import {LoginManager, AccessToken} from 'react-native-fbsdk-next';
+import {SignInContext} from '../contexts/authContext';
+// import auth, {firebase} from '@react-native-firebase/auth';
+// import firestore from '@react-native-firebase/firestore';
+// import {GoogleSignin} from '@react-native-google-signin/google-signin';
+// import {LoginManager, AccessToken} from 'react-native-fbsdk-next';
 
-GoogleSignin.configure({
-  webClientId:
-    '359199845323-h10e31djcqb9fbobv2vknmh1h1h5hge0.apps.googleusercontent.com',
-});
+// GoogleSignin.configure({
+//   webClientId:
+//     '359199845323-h10e31djcqb9fbobv2vknmh1h1h5hge0.apps.googleusercontent.com',
+// });
 export default function SignInScreen({navigation}) {
   const {dispatchSignedIn} = useContext(SignInContext);
   const [textinput2Fossued, setTextInput2Fossued] = useState(false);
@@ -32,86 +31,86 @@ export default function SignInScreen({navigation}) {
   const [getemail, setemail] = useState('');
   const [getVisible, setVisible] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
-  async function signIn(data) {
-    try {
-      const {password, email} = data;
-      const user = await auth().signInWithEmailAndPassword(email, password);
-      if (user) {
-        firestore()
-          .collection('Users')
-          .doc(user.user.uid)
-          .get()
-          .then(documentSnapshot => {
-            dispatchSignedIn({
-              type: 'UPDATE_SIGN_IN',
-              payload: {userToken: documentSnapshot.data().roll},
-            });
-          });
-      }
-    } catch (error) {
-      Alert.alert(error.name, error.message);
-    }
-  }
+  // async function signIn(data) {
+  //   try {
+  //     const {password, email} = data;
+  //     const user = await auth().signInWithEmailAndPassword(email, password);
+  //     if (user) {
+  //       firestore()
+  //         .collection('Users')
+  //         .doc(user.user.uid)
+  //         .get()
+  //         .then(documentSnapshot => {
+  //           dispatchSignedIn({
+  //             type: 'UPDATE_SIGN_IN',
+  //             payload: {userToken: documentSnapshot.data().roll},
+  //           });
+  //         });
+  //     }
+  //   } catch (error) {
+  //     Alert.alert(error.name, error.message);
+  //   }
+  // }
 
-  async function onGoogleButtonPress() {
-    try {
-      const {idToken} = await GoogleSignin.signIn();
-      const googleCredential = auth.GoogleAuthProvider.credential(idToken);
-      const user = await auth().signInWithCredential(googleCredential);
-      if (user) {
-        dispatchSignedIn({
-          type: 'UPDATE_SIGN_IN',
-          payload: {userToken: 3},
-        });
-      }
-    } catch (error) {
-      Alert.alert(error.name, error.message);
-    }
-  }
+  // async function onGoogleButtonPress() {
+  //   try {
+  //     const {idToken} = await GoogleSignin.signIn();
+  //     const googleCredential = auth.GoogleAuthProvider.credential(idToken);
+  //     const user = await auth().signInWithCredential(googleCredential);
+  //     if (user) {
+  //       dispatchSignedIn({
+  //         type: 'UPDATE_SIGN_IN',
+  //         payload: {userToken: 3},
+  //       });
+  //     }
+  //   } catch (error) {
+  //     Alert.alert(error.name, error.message);
+  //   }
+  // }
 
-  async function onFacebookButtonPress() {
-    try {
-      const result = await LoginManager.logInWithPermissions([
-        'public_profile',
-        'email',
-      ]);
+  // async function onFacebookButtonPress() {
+  //   try {
+  //     const result = await LoginManager.logInWithPermissions([
+  //       'public_profile',
+  //       'email',
+  //     ]);
 
-      if (result.isCancelled) {
-        throw 'User cancelled the login process';
-      }
-      const data = await AccessToken.getCurrentAccessToken();
-      if (!data) {
-        throw 'Something went wrong obtaining access token';
-      }
-      const facebookCredential = auth.FacebookAuthProvider.credential(
-        data.accessToken,
-      );
-      const user = await auth().signInWithCredential(facebookCredential);
-      if (user) {
-        dispatchSignedIn({
-          type: 'UPDATE_SIGN_IN',
-          payload: {userToken: 3},
-        });
-      }
-    } catch (error) {
-      Alert.alert(error.name, error.message);
-    }
-  }
-  async function forgotPassword(Email) {
-    if (Email) {
-      firebase
-        .auth()
-        .sendPasswordResetEmail(Email)
-        .then(function (user) {
-          alert('Please check your email...');
-        })
-        .catch(function (e) {
-          console.log(e);
-        });
-    } else {
-      return;
-    }
-  }
+  //     if (result.isCancelled) {
+  //       throw 'User cancelled the login process';
+  //     }
+  //     const data = await AccessToken.getCurrentAccessToken();
+  //     if (!data) {
+  //       throw 'Something went wrong obtaining access token';
+  //     }
+  //     const facebookCredential = auth.FacebookAuthProvider.credential(
+  //       data.accessToken,
+  //     );
+  //     const user = await auth().signInWithCredential(facebookCredential);
+  //     if (user) {
+  //       dispatchSignedIn({
+  //         type: 'UPDATE_SIGN_IN',
+  //         payload: {userToken: 3},
+  //       });
+  //     }
+  //   } catch (error) {
+  //     Alert.alert(error.name, error.message);
+  //   }
+  // }
+  // async function forgotPassword(Email) {
+  //   if (Email) {
+  //     firebase
+  //       .auth()
+  //       .sendPasswordResetEmail(Email)
+  //       .then(function (user) {
+  //         alert('Please check your email...');
+  //       })
+  //       .catch(function (e) {
+  //         console.log(e);
+  //       });
+  //   } else {
+  //     return;
+  //   }
+  // }
   return (
     <>
       <View style={styles.container}>
@@ -129,7 +128,7 @@ export default function SignInScreen({navigation}) {
             <View>
               <View style={{marginTop: 20}}>
                 <View style={styles.textinput2}>
-                  <Icon name="email" color={colors.grey3} type="material" />
+                  {/* <Icon name="email" color={colors.grey3} type="material" /> */}
                   <TextInput
                     placeholder="Email"
                     ref={textinput1}
@@ -143,12 +142,12 @@ export default function SignInScreen({navigation}) {
                   <Animatable.View
                     animation={textinput2Fossued ? '' : 'fadeInLeft'}
                     duration={400}>
-                    <Icon
+                    {/* <Icon
                       name="lock"
                       iconStyle={{color: colors.grey3}}
                       type="material"
                       style={{}}
-                    />
+                    /> */}
                   </Animatable.View>
                   <TextInput
                     autoCapitalize="none"
@@ -168,25 +167,25 @@ export default function SignInScreen({navigation}) {
                   <Animatable.View
                     animation={textinput2Fossued ? '' : 'fadeInLeft'}
                     duration={400}>
-                    <Icon
+                    {/* <Icon
                       name={getVisible ? 'visibility' : 'visibility-off'}
                       iconStyle={{color: colors.grey3, marginRight: 10}}
                       type="material"
                       onPress={() => {
                         setVisible(!getVisible);
                       }}
-                    />
+                    /> */}
                   </Animatable.View>
                 </View>
               </View>
 
               <View style={{marginHorizontal: 20, marginTop: 10}}>
-                <Button
+                {/* <Button
                   title="Login"
                   buttonStyle={styles.styledButton}
                   titleStyle={styles.buttonTitle}
                   onPress={props.handleSubmit}
-                />
+                /> */}
               </View>
             </View>
           )}
@@ -206,7 +205,7 @@ export default function SignInScreen({navigation}) {
         </View>
 
         <View style={{marginHorizontal: 10, marginTop: -2}}>
-          <SocialIcon
+          {/* <SocialIcon
             title="Login with Facebook"
             button
             type="facebook"
@@ -214,10 +213,10 @@ export default function SignInScreen({navigation}) {
             onPress={() => {
               onFacebookButtonPress();
             }}
-          />
+          /> */}
         </View>
         <View style={{marginHorizontal: 10, marginTop: 0}}>
-          <SocialIcon
+          {/* <SocialIcon
             title="Login with Google"
             button
             type="google"
@@ -225,7 +224,7 @@ export default function SignInScreen({navigation}) {
             onPress={() => {
               onGoogleButtonPress();
             }}
-          />
+          /> */}
         </View>
 
         <View style={{marginTop: 20, marginLeft: 20}}>
@@ -233,14 +232,14 @@ export default function SignInScreen({navigation}) {
         </View>
 
         <View style={{alignItems: 'flex-end', marginHorizontal: 20}}>
-          <Button
+          {/* <Button
             title="Sign up"
             buttonStyle={styles.createButton}
             titleStyle={styles.createButtonTittle}
             onPress={() => {
               navigation.navigate('SignUpScreen');
             }}
-          />
+          /> */}
         </View>
         <Modal
           animationType="slide"
@@ -276,7 +275,7 @@ export default function SignInScreen({navigation}) {
                   value={getemail}
                 />
               </View>
-              <Button
+              {/* <Button
                 title="Send Email"
                 buttonStyle={{
                   alignContent: 'center',
@@ -291,7 +290,7 @@ export default function SignInScreen({navigation}) {
                   forgotPassword(getemail);
                   setModalVisible(!modalVisible);
                 }}
-              />
+              /> */}
             </View>
           </View>
         </Modal>
