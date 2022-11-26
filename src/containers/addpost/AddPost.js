@@ -30,6 +30,7 @@ const DRAG_THRESHOLD = 50;
 
 export default function AddPost({navigation, route}) {
   const itemData = route.params.data;
+  const id=route.params.id;
   //Bottom sheet
   const animatedValue = useRef(new Animated.Value(0)).current;
   const lastGestureDy = useRef(0);
@@ -283,7 +284,7 @@ export default function AddPost({navigation, route}) {
                   <TouchableOpacity
                     style={styles.btnNext}
                     onPress={() => {
-                      handleNext();
+                      id===0? handleNext():null;
                     }}>
                     <Text
                       style={{
@@ -291,7 +292,7 @@ export default function AddPost({navigation, route}) {
                         fontSize: 14,
                         fontWeight: 'bold',
                       }}>
-                      Next
+                      {id===0?'Next':'Done'}
                     </Text>
                   </TouchableOpacity>
                 </View>

@@ -15,7 +15,6 @@ import Icon2 from 'react-native-vector-icons/MaterialIcons';
 import Icon3 from 'react-native-vector-icons/EvilIcons';
 import DatetimePicker from '@react-native-community/datetimepicker';
 export default function SearchFeed() {
-  const [tab, setTab] = useState(0);
   const [verhicale, setVerhicale] = useState('Bike');
   const [modavisible, setModavisible] = useState(false);
   const [date, setdate] = useState(new Date());
@@ -36,83 +35,6 @@ export default function SearchFeed() {
   };
   return (
     <View>
-      <View
-        style={{
-          flexDirection: 'row',
-          backgroundColor: 'green',
-          height: 80,
-          alignItems: 'center',
-          justifyContent: 'space-between',
-        }}>
-        <TouchableOpacity
-          style={{
-            left: 10,
-            backgroundColor: 'white',
-            borderRadius: 22.5,
-            height: 45,
-            width: 45,
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}>
-          <Icon name="notifications" size={25} color={color.green} />
-        </TouchableOpacity>
-        <View
-          style={{
-            flexDirection: 'row',
-            backgroundColor: color.primarygreen,
-            width: 190,
-            height: 55,
-            borderRadius: 27.5,
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            marginVertical: 10,
-          }}>
-          <TouchableOpacity
-            style={[
-              styles.tab,
-              {left: 7.5},
-              tab === 0 ? {backgroundColor: 'white'} : null,
-            ]}
-            onPress={() => {
-              setTab(0);
-            }}>
-            <Text
-              style={[
-                styles.textab,
-                tab === 0 ? {color: color.primarygreen} : {color: 'white'},
-              ]}>
-              Rider
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={[
-              styles.tab,
-              {right: 7.5},
-              tab === 1 ? {backgroundColor: 'white'} : null,
-            ]}
-            onPress={() => {
-              setTab(1);
-            }}>
-            <Text
-              style={[
-                styles.textab,
-                tab === 1 ? {color: color.primarygreen} : {color: 'white'},
-              ]}>
-              Hitchhiker
-            </Text>
-          </TouchableOpacity>
-        </View>
-        <TouchableOpacity
-          style={{right: 10}}
-          onPress={() => {
-            navigation.navigate('myaccount');
-          }}>
-          <Image
-            source={require('../../assets/image/avatar.jpg')}
-            style={{width: 45, height: 45, borderRadius: 25, marginLeft: 10}}
-          />
-        </TouchableOpacity>
-      </View>
       {/* //SEARCH */}
       <View
         style={{
