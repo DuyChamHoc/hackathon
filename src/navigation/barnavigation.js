@@ -7,6 +7,7 @@ import Icon1 from 'react-native-vector-icons/AntDesign';
 import Icon2 from 'react-native-vector-icons/Entypo';
 import MyAccountScreen from '../containers/account/MyAccountScreen';
 import FeedScreen from '../containers/search/index';
+import {color} from '../assets/colors/color';
 const Tab = createBottomTabNavigator();
 export default function barnavigation() {
   return (
@@ -20,7 +21,7 @@ export default function barnavigation() {
           tabBarIcon: ({focussed, size}) => (
             <Icon
               name="home"
-              color={focussed ? '#7cc' : colors.grey2}
+              color={focussed ? '#7cc' : color.primarygreen}
               size={size}
             />
           ),
@@ -35,7 +36,7 @@ export default function barnavigation() {
           tabBarIcon: ({focussed, size}) => (
             <Icon2
               name="text-document"
-              color={focussed ? '#7cc' : colors.grey2}
+              color={focussed ? '#7cc' : color.primarygreen}
               size={size}
             />
           ),
@@ -50,7 +51,7 @@ export default function barnavigation() {
           tabBarIcon: ({focussed, size}) => (
             <Icon1
               name="user"
-              color={focussed ? '#7cc' : colors.grey2}
+              color={focussed ? '#7cc' : color.primarygreen}
               size={size}
             />
           ),
