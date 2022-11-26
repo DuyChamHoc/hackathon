@@ -101,7 +101,7 @@ export default function SignInWelcomeScreen({navigation}) {
             <Text style={parameters.buttonTitle}>Login</Text>
           </TouchableOpacity>
         </View>
-        <View style={{marginHorizontal: 20, marginTop: 15, marginLeft: 12}}>
+        <View style={{marginHorizontal: 20, marginLeft: 12}}>
           <TouchableOpacity
             style={styles.createButton}
             onPress={() => {
