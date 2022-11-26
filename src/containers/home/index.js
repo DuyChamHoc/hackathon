@@ -7,7 +7,7 @@ import {
   Image,
   ScrollView,
 } from 'react-native';
-import Swiper from "react-native-swiper"
+import Swiper from 'react-native-swiper';
 import {color} from '../../assets/colors/color';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Icon2 from 'react-native-vector-icons/MaterialIcons';
@@ -96,6 +96,52 @@ export default function Home({navigation}) {
       </View>
       {tab === 0 ? (
         <View>
+          <TouchableOpacity style={{alignItems: 'center'}}>
+            <View style={{height: 200}}>
+              <Swiper
+                activeDot={
+                  <View
+                    style={{
+                      backgroundColor: color.green,
+                      width: 8,
+                      height: 8,
+                      borderRadius: 4,
+                      marginLeft: 3,
+                      marginRight: 3,
+                      marginTop: 3,
+                      marginBottom: 3,
+                    }}
+                  />
+                }
+                autoplay={true}
+                style={{
+                  alignContent: 'center',
+                  marginLeft: 25,
+                  justifyContent: 'center',
+                  marginTop: 40,
+                  height: 170,
+                }}>
+                <View style={{height: 150, width: 348}}>
+                  <Image
+                    source={{uri: 'https://i.imgur.com/noRIECL.png'}}
+                    style={{height: '100%', width: '100%'}}
+                  />
+                </View>
+                <View style={{height: 150, width: 348}}>
+                  <Image
+                    source={{uri: 'https://i.imgur.com/xXb186h.png'}}
+                    style={{height: '100%', width: '100%'}}
+                  />
+                </View>
+                <View style={{height: 150, width: 348}}>
+                  <Image
+                    source={{uri: 'https://i.imgur.com/tPKSn8j.png'}}
+                    style={{height: '100%', width: '100%'}}
+                  />
+                </View>
+              </Swiper>
+            </View>
+          </TouchableOpacity>
           <Text
             style={{
               fontSize: 16,
@@ -156,7 +202,7 @@ export default function Home({navigation}) {
                   justifyContent: 'center',
                 }}
                 onPress={() => {
-                  navigation.navigate('AddFeed',{id:0});
+                  navigation.navigate('AddFeed', {id: 0});
                 }}>
                 <View
                   style={{
@@ -283,10 +329,50 @@ export default function Home({navigation}) {
       ) : (
         <View>
           <TouchableOpacity style={{alignItems: 'center'}}>
-            <Image
-              source={require('../../assets/image/advertise1.png')}
-              style={{width: 350}}
-            />
+            <View style={{height: 200}}>
+              <Swiper
+                activeDot={
+                  <View
+                    style={{
+                      backgroundColor: color.green,
+                      width: 8,
+                      height: 8,
+                      borderRadius: 4,
+                      marginLeft: 3,
+                      marginRight: 3,
+                      marginTop: 3,
+                      marginBottom: 3,
+                    }}
+                  />
+                }
+                autoplay={true}
+                style={{
+                  alignContent: 'center',
+                  marginLeft: 25,
+                  justifyContent: 'center',
+                  marginTop: 40,
+                  height: 170,
+                }}>
+                <View style={{height: 150, width: 348}}>
+                  <Image
+                    source={{uri: 'https://i.imgur.com/VRhrkJM.png'}}
+                    style={{height: '100%', width: '100%'}}
+                  />
+                </View>
+                <View style={{height: 150, width: 348}}>
+                  <Image
+                    source={{uri: 'https://i.imgur.com/xXb186h.png'}}
+                    style={{height: '100%', width: '100%'}}
+                  />
+                </View>
+                <View style={{height: 150, width: 348}}>
+                  <Image
+                    source={{uri: 'https://i.imgur.com/tPKSn8j.png'}}
+                    style={{height: '100%', width: '100%'}}
+                  />
+                </View>
+              </Swiper>
+            </View>
           </TouchableOpacity>
           <Text
             style={{
@@ -308,7 +394,9 @@ export default function Home({navigation}) {
               alignItems: 'center',
               justifyContent: 'center',
             }}
-            onPress={()=>{navigation.navigate('AddFeed',{id:1})}}>
+            onPress={() => {
+              navigation.navigate('AddFeed', {id: 1});
+            }}>
             <Image
               source={require('../../assets/image/feed.png')}
               style={{width: 30, height: 30, right: 10}}
