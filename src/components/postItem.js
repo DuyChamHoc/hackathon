@@ -5,26 +5,23 @@ import Icon1 from 'react-native-vector-icons/MaterialIcons';
 const PostItem = () => {
   return (
     <TouchableOpacity style={styles.Border}>
-      <Text style={{width: 250}}>
+      <Text style={{width: 190}}>
         Co chuyen di sang mai tu Quan 1 ve Thu Duc, ai can di nho thi lien he
         0123456789
       </Text>
-      <View style={{flexDirection: 'column'}}>
-        <View></View>
-        <View>
-          <View>
-            <Icon name="calendar" size={30} color="#900" />
-            <Text>27/07/2022, 10h</Text>
+      <View style={{left:10}}>
+          <View style={{flexDirection:"row"}}>
+            <Icon name="calendar" size={25} color='black' />
+            <Text style={{width:115,left:5}}>27/07/2022, 10h</Text>
           </View>
-          <View>
-            <Icon name="location" type="evilicon" color="black" />
-            <Text>27/07/2022, 10h</Text>
+          <View style={{flexDirection:"row",marginVertical:5}}>
+            <Icon name="location" size={25} color="black" />
+            <Text style={{left:5,width:115}}>27/07/2022, 10h</Text>
           </View>
-          <View>
-            <Icon1 name="my-location" size={30} color="#900" />
-            <Text>27/07/2022, 10h</Text>
+          <View style={{flexDirection:"row"}}>
+            <Icon1 name="my-location" size={25} color="black" />
+            <Text style={{width:115,left:5}}>27/07/2022, 1dddddddddddddddddddddd</Text>
           </View>
-        </View>
       </View>
     </TouchableOpacity>
   );
@@ -37,7 +34,8 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 10,
     borderColor: '#6CC165',
-    padding: 20,
+    padding: 10,
     flexDirection: 'row',
+    marginHorizontal:10
   },
 });
