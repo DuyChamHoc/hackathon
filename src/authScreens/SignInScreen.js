@@ -9,20 +9,22 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import {colors} from '../global/styles';
+import Icon from 'react-native-vector-icons/Entypo';
 import Icon1 from 'react-native-vector-icons/FontAwesome';
+import Icon2 from 'react-native-vector-icons/MaterialCommunityIcons';
+import Icon3 from 'react-native-vector-icons/MaterialIcons';
 import Header from '../components/Header';
 import * as Animatable from 'react-native-animatable';
 import {Formik} from 'formik';
 import {SignInContext} from '../contexts/authContext';
-// import auth, {firebase} from '@react-native-firebase/auth';
-// import firestore from '@react-native-firebase/firestore';
-// import {GoogleSignin} from '@react-native-google-signin/google-signin';
-// import {LoginManager, AccessToken} from 'react-native-fbsdk-next';
+import auth, {firebase} from '@react-native-firebase/auth';
+import firestore from '@react-native-firebase/firestore';
+import {GoogleSignin} from '@react-native-google-signin/google-signin';
 
-// GoogleSignin.configure({
-//   webClientId:
-//     '359199845323-h10e31djcqb9fbobv2vknmh1h1h5hge0.apps.googleusercontent.com',
-// });
+GoogleSignin.configure({
+  webClientId:
+    '98238674164-urf3dl5a63k4apui9ssd20qiaq0iial6.apps.googleusercontent.com',
+});
 export default function SignInScreen({navigation}) {
   const {dispatchSignedIn} = useContext(SignInContext);
   const [textinput2Fossued, setTextInput2Fossued] = useState(false);
@@ -31,86 +33,52 @@ export default function SignInScreen({navigation}) {
   const [getemail, setemail] = useState('');
   const [getVisible, setVisible] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
-  // async function signIn(data) {
-  //   try {
-  //     const {password, email} = data;
-  //     const user = await auth().signInWithEmailAndPassword(email, password);
-  //     if (user) {
-  //       firestore()
-  //         .collection('Users')
-  //         .doc(user.user.uid)
-  //         .get()
-  //         .then(documentSnapshot => {
-  //           dispatchSignedIn({
-  //             type: 'UPDATE_SIGN_IN',
-  //             payload: {userToken: documentSnapshot.data().roll},
-  //           });
-  //         });
-  //     }
-  //   } catch (error) {
-  //     Alert.alert(error.name, error.message);
-  //   }
-  // }
+  async function signIn(data) {
+    try {
+      const {password, email} = data;
+      const user = await auth().signInWithEmailAndPassword(email, password);
+      if (user) {
+        dispatchSignedIn({
+          type: 'UPDATE_SIGN_IN',
+          payload: {userToken: 'User'},
+        });
+      }
+    } catch (error) {
+      Alert.alert(error.name, error.message);
+    }
+  }
 
-  // async function onGoogleButtonPress() {
-  //   try {
-  //     const {idToken} = await GoogleSignin.signIn();
-  //     const googleCredential = auth.GoogleAuthProvider.credential(idToken);
-  //     const user = await auth().signInWithCredential(googleCredential);
-  //     if (user) {
-  //       dispatchSignedIn({
-  //         type: 'UPDATE_SIGN_IN',
-  //         payload: {userToken: 3},
-  //       });
-  //     }
-  //   } catch (error) {
-  //     Alert.alert(error.name, error.message);
-  //   }
-  // }
+  async function onGoogleButtonPress() {
+    try {
+      const {idToken} = await GoogleSignin.signIn();
+      const googleCredential = auth.GoogleAuthProvider.credential(idToken);
+      const user = await auth().signInWithCredential(googleCredential);
+      if (user) {
+        dispatchSignedIn({
+          type: 'UPDATE_SIGN_IN',
+          payload: {userToken: 'User'},
+        });
+      }
+    } catch (error) {
+      Alert.alert(error.name, error.message);
+    }
+  }
 
-  // async function onFacebookButtonPress() {
-  //   try {
-  //     const result = await LoginManager.logInWithPermissions([
-  //       'public_profile',
-  //       'email',
-  //     ]);
-
-  //     if (result.isCancelled) {
-  //       throw 'User cancelled the login process';
-  //     }
-  //     const data = await AccessToken.getCurrentAccessToken();
-  //     if (!data) {
-  //       throw 'Something went wrong obtaining access token';
-  //     }
-  //     const facebookCredential = auth.FacebookAuthProvider.credential(
-  //       data.accessToken,
-  //     );
-  //     const user = await auth().signInWithCredential(facebookCredential);
-  //     if (user) {
-  //       dispatchSignedIn({
-  //         type: 'UPDATE_SIGN_IN',
-  //         payload: {userToken: 3},
-  //       });
-  //     }
-  //   } catch (error) {
-  //     Alert.alert(error.name, error.message);
-  //   }
-  // }
-  // async function forgotPassword(Email) {
-  //   if (Email) {
-  //     firebase
-  //       .auth()
-  //       .sendPasswordResetEmail(Email)
-  //       .then(function (user) {
-  //         alert('Please check your email...');
-  //       })
-  //       .catch(function (e) {
-  //         console.log(e);
-  //       });
-  //   } else {
-  //     return;
-  //   }
-  // }
+  async function forgotPassword(Email) {
+    if (Email) {
+      firebase
+        .auth()
+        .sendPasswordResetEmail(Email)
+        .then(function (user) {
+          alert('Please check your email...');
+        })
+        .catch(function (e) {
+          console.log(e);
+        });
+    } else {
+      return;
+    }
+  }
   return (
     <>
       <View style={styles.container}>
@@ -128,7 +96,7 @@ export default function SignInScreen({navigation}) {
             <View>
               <View style={{marginTop: 20}}>
                 <View style={styles.textinput2}>
-                  {/* <Icon name="email" color={colors.grey3} type="material" /> */}
+                  <Icon2 name="email" size={20} />
                   <TextInput
                     placeholder="Email"
                     ref={textinput1}
@@ -142,12 +110,7 @@ export default function SignInScreen({navigation}) {
                   <Animatable.View
                     animation={textinput2Fossued ? '' : 'fadeInLeft'}
                     duration={400}>
-                    {/* <Icon
-                      name="lock"
-                      iconStyle={{color: colors.grey3}}
-                      type="material"
-                      style={{}}
-                    /> */}
+                    <Icon name="lock" size={20} />
                   </Animatable.View>
                   <TextInput
                     autoCapitalize="none"
@@ -167,25 +130,23 @@ export default function SignInScreen({navigation}) {
                   <Animatable.View
                     animation={textinput2Fossued ? '' : 'fadeInLeft'}
                     duration={400}>
-                    {/* <Icon
+                    <Icon3
                       name={getVisible ? 'visibility' : 'visibility-off'}
-                      iconStyle={{color: colors.grey3, marginRight: 10}}
-                      type="material"
+                      size={20}
                       onPress={() => {
                         setVisible(!getVisible);
                       }}
-                    /> */}
+                    />
                   </Animatable.View>
                 </View>
               </View>
 
               <View style={{marginHorizontal: 20, marginTop: 10}}>
-                {/* <Button
-                  title="Login"
-                  buttonStyle={styles.styledButton}
-                  titleStyle={styles.buttonTitle}
-                  onPress={props.handleSubmit}
-                /> */}
+                <TouchableOpacity
+                  style={styles.styledButton}
+                  onPress={props.handleSubmit}>
+                  <Text style={styles.buttonTitle}>Login</Text>
+                </TouchableOpacity>
               </View>
             </View>
           )}
@@ -204,27 +165,14 @@ export default function SignInScreen({navigation}) {
           <Text style={{fontSize: 20, fontWeight: 'bold'}}>OR</Text>
         </View>
 
-        <View style={{marginHorizontal: 10, marginTop: -2}}>
-          {/* <SocialIcon
-            title="Login with Facebook"
-            button
-            type="facebook"
-            style={styles.SocialIcon}
-            onPress={() => {
-              onFacebookButtonPress();
-            }}
-          /> */}
-        </View>
         <View style={{marginHorizontal: 10, marginTop: 0}}>
-          {/* <SocialIcon
-            title="Login with Google"
-            button
-            type="google"
+          <TouchableOpacity
             style={styles.SocialIcon}
             onPress={() => {
               onGoogleButtonPress();
-            }}
-          /> */}
+            }}>
+            <Text>Login with Google</Text>
+          </TouchableOpacity>
         </View>
 
         <View style={{marginTop: 20, marginLeft: 20}}>
@@ -232,14 +180,13 @@ export default function SignInScreen({navigation}) {
         </View>
 
         <View style={{alignItems: 'flex-end', marginHorizontal: 20}}>
-          {/* <Button
-            title="Sign up"
-            buttonStyle={styles.createButton}
-            titleStyle={styles.createButtonTittle}
+          <TouchableOpacity
+            style={styles.createButton}
             onPress={() => {
               navigation.navigate('SignUpScreen');
-            }}
-          /> */}
+            }}>
+            <Text style={styles.createButtonTittle}>Sign up</Text>
+          </TouchableOpacity>
         </View>
         <Modal
           animationType="slide"
@@ -275,22 +222,21 @@ export default function SignInScreen({navigation}) {
                   value={getemail}
                 />
               </View>
-              {/* <Button
-                title="Send Email"
-                buttonStyle={{
+              <TouchableOpacity
+                onPress={() => {
+                  forgotPassword(getemail);
+                  setModalVisible(!modalVisible);
+                }}
+                style={{
                   alignContent: 'center',
                   borderRadius: 15,
                   height: 45,
                   width: 250,
                   backgroundColor: colors.blue,
                   marginLeft: 8,
-                }}
-                titleStyle={styles.buttonTitle}
-                onPress={() => {
-                  forgotPassword(getemail);
-                  setModalVisible(!modalVisible);
-                }}
-              /> */}
+                }}>
+                <Text style={styles.buttonTitle}>Send Email</Text>
+              </TouchableOpacity>
             </View>
           </View>
         </Modal>

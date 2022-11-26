@@ -6,11 +6,14 @@ import {
   ScrollView,
   TextInput,
   Alert,
+  TouchableOpacity,
 } from 'react-native';
-import {colors} from '../../global/styles';
-import Header from '../../components/Header';
-import {Icon, Button} from 'react-native-elements';
+import {colors} from '../global/styles';
+import Header from '../components/Header';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Icon1 from 'react-native-vector-icons/Entypo';
+import Icon2 from 'react-native-vector-icons/Entypo';
+import Icon3 from 'react-native-vector-icons/MaterialIcons';
 import * as Animatable from 'react-native-animatable';
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
@@ -56,7 +59,6 @@ const SignUpScreen = ({navigation}) => {
           phone_number: phonenumber,
           full_name: fullname,
           datetime: formattedDate,
-          roll: 3,
         })
         .then(() => {
           console.log('User added!');
@@ -165,12 +167,7 @@ const SignUpScreen = ({navigation}) => {
             <Animatable.View
               animation={passwordFocussed ? 'fadeInRight' : 'fadeInLeft'}
               duration={400}>
-              <Icon
-                name="lock"
-                color={colors.grey3}
-                type="material"
-                style={{marginLeft: 10, marginRight: 10}}
-              />
+              <Icon2 name="lock" size={20} />
             </Animatable.View>
             <TextInput
               placeholder="Password"
@@ -187,10 +184,9 @@ const SignUpScreen = ({navigation}) => {
               secureTextEntry={getVisible ? false : true}
             />
             <Animatable.View duration={400}>
-              <Icon
+              <Icon3
                 name={getVisible ? 'visibility' : 'visibility-off'}
-                iconStyle={{color: colors.grey3, marginRight: 10}}
-                type="material"
+                size={20}
                 onPress={() => {
                   setVisible(!getVisible);
                 }}
@@ -209,12 +205,9 @@ const SignUpScreen = ({navigation}) => {
             <Text style={styles.text4}>Privacy statement</Text>
           </View>
           <View style={styles.view17}>
-            <Button
-              title="Create Account"
-              buttonStyle={styles.button1}
-              titleStyle={styles.title1}
-              onPress={signUp}
-            />
+            <TouchableOpacity style={styles.button1} onPress={signUp}>
+              <Text style={styles.title1}>Create Account</Text>
+            </TouchableOpacity>
           </View>
         </View>
         <View style={styles.view18}>
@@ -227,14 +220,13 @@ const SignUpScreen = ({navigation}) => {
             </Text>
           </View>
           <View style={[styles.view21, {marginTop: 16}]}>
-            <Button
-              title="Sign in"
-              buttonStyle={styles.button2}
-              titleStyle={styles.title2}
+            <TouchableOpacity
+              style={styles.button2}
               onPress={() => {
                 navigation.navigate('SignInScreen');
-              }}
-            />
+              }}>
+              <Text style={styles.title2}>Sign in</Text>
+            </TouchableOpacity>
           </View>
         </View>
       </ScrollView>
