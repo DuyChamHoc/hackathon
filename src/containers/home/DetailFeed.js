@@ -154,6 +154,9 @@ export default function DetailFeed() {
             />
           </View>
       </View>
+
+
+      {/* Cmt section */}
       <Text style={{fontWeight:'700',fontSize:18,color:"black",left:22,marginVertical:20}}>Related rides</Text>
       <TouchableOpacity style={{
          borderWidth: 1,

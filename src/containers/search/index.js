@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   View,
   Text,
@@ -14,13 +14,16 @@ import Icon1 from 'react-native-vector-icons/AntDesign';
 import Icon2 from 'react-native-vector-icons/MaterialIcons';
 import Icon3 from 'react-native-vector-icons/EvilIcons';
 import DatetimePicker from '@react-native-community/datetimepicker';
+import firestore from '@react-native-firebase/firestore';
 export default function SearchFeed() {
   const [tab, setTab] = useState(0);
-  const [verhicale, setVerhicale] = useState('Bike');
+  const [vehicle, setVehicle] = useState('Bike');
   const [modavisible, setModavisible] = useState(false);
   const [date, setdate] = useState(new Date());
   const [mode, setmode] = useState('date');
   const [show, setShow] = useState(false);
+  const [feed, setFeed] = useState([])
+
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate || date;
     setShow(false);
@@ -34,8 +37,29 @@ export default function SearchFeed() {
   const showDatepicker = () => {
     showMode('date');
   };
+
+  const loadFeeds = async () => {
+    firestore().collection('Feeds').get().then(querySnapshot => {
+      querySnapshot.forEach(documentSnapshot => {
+        feed.push(documentSnapshot.data())
+        // documentSnapshot.data().user.get().then(profileSnapshot => {
+        //   const usr = profileSnapshot.data().full_name
+        //   feed.push({
+        //     ...documentSnapshot.data(),
+        //     username: usr
+        //   })
+        // })
+      })
+    })
+  }
+
+  useEffect(() => {
+    loadFeeds()
+  }, []);
+
   return (
     <View>
+      <Text onPress={() => console.log(feed)}>AAA</Text>
       <View
         style={{
           flexDirection: 'row',
@@ -189,7 +213,7 @@ export default function SearchFeed() {
                 style={{
                   height: 40,
                   backgroundColor:
-                    verhicale === 'Bike' ? color.green1 : 'white',
+                    vehicle === 'Bike' ? color.green1 : 'white',
                   borderTopLeftRadius: 10,
                   borderBottomLeftRadius: 10,
                   width: 70,
@@ -199,11 +223,11 @@ export default function SearchFeed() {
                   borderWidth: 1,
                 }}
                 onPress={() => {
-                  setVerhicale('Bike');
+                  setVehicle('Bike');
                 }}>
                 <Text
                   style={{
-                    color: verhicale === 'Bike' ? 'white' : color.green1,
+                    color: vehicle === 'Bike' ? 'white' : color.green1,
                   }}>
                   Bike
                 </Text>
@@ -212,7 +236,7 @@ export default function SearchFeed() {
                 style={{
                   height: 40,
                   backgroundColor:
-                    verhicale !== 'Bike' ? color.green1 : 'white',
+                    vehicle !== 'Bike' ? color.green1 : 'white',
                   borderTopRightRadius: 10,
                   borderBottomRightRadius: 10,
                   left: 5,
@@ -224,11 +248,11 @@ export default function SearchFeed() {
                   borderWidth: 1,
                 }}
                 onPress={() => {
-                  setVerhicale('Car');
+                  setVehicle('Car');
                 }}>
                 <Text
                   style={{
-                    color: verhicale !== 'Bike' ? 'white' : color.green1,
+                    color: vehicle !== 'Bike' ? 'white' : color.green1,
                   }}>
                   Car
                 </Text>
@@ -311,7 +335,9 @@ export default function SearchFeed() {
         </TouchableOpacity>
       </Modal>
       {/* OVERHERE */}
-      <TouchableOpacity
+      {feed.map((item, index) => {
+        {console.log(item)}
+        <TouchableOpacity
         style={{
           borderWidth: 1,
           borderRadius: 10,
@@ -328,7 +354,7 @@ export default function SearchFeed() {
           <View>
             <View style={{flexDirection: 'row', marginTop: 10}}>
               <Text style={{fontSize: 15, fontWeight: '700', color: 'black'}}>
-                Nguyen Van A
+               {item.context}
               </Text>
             </View>
             <Text>2 hour ago</Text>
@@ -358,6 +384,7 @@ export default function SearchFeed() {
           </View>
         </View>
       </TouchableOpacity>
+      })}    
     </View>
   );
 }
