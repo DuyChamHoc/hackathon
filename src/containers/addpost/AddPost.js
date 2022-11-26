@@ -16,6 +16,7 @@ import Icon2 from 'react-native-vector-icons/Ionicons';
 import Icon3 from 'react-native-vector-icons/MaterialCommunityIcons';
 import Icon4 from 'react-native-vector-icons/Entypo';
 
+import auth from '@react-native-firebase/auth';
 import MapView, {Marker} from 'react-native-maps';
 import MapViewDirections from 'react-native-maps-directions';
 import {GooglePlacesAutocomplete} from 'react-native-google-places-autocomplete';
@@ -27,7 +28,8 @@ const MAX_UPWARD_TRANSLATE_Y = BOTTOM_SHEET_MIN_HIGHT - BOTTOM_SHEET_MAX_HIGHT;
 const MAX_DOWNWARD_TRANSLATE_Y = 0;
 const DRAG_THRESHOLD = 50;
 
-export default function AddPost({navigation}) {
+export default function AddPost({navigation, route}) {
+  const itemData = route.params.data;
   //Bottom sheet
   const animatedValue = useRef(new Animated.Value(0)).current;
   const lastGestureDy = useRef(0);
@@ -98,7 +100,6 @@ export default function AddPost({navigation}) {
     )
       .then(response => response.json())
       .then(responseJson => {
-        console.log(responseJson.result);
         setDestination({
           latitude: responseJson.result.geometry.location.lat,
           longitude: responseJson.result.geometry.location.lng,
@@ -140,7 +141,19 @@ export default function AddPost({navigation}) {
     }
   };
   const handleDone = () => {
-    console.log('Done');
+    let data = {
+      _useruid: auth().currentUser.uid,
+      origin: origin,
+      destination: destination,
+      date: itemData.date,
+      description: itemData.description,
+      vehicle: isChooseBike ? 'Bike' : 'Car',
+      numPeople: isChooseBike ? 1 : numPeople,
+      options: isChooseTip ? 'tip' : isChooseShare ? 'share' : 'free',
+      destinationName: destinationName,
+      originName: name,
+    };
+    console.log(data);
   };
   const handleBack = () => {
     setIsShowChooseLocation(true);

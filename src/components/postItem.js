@@ -9,19 +9,21 @@ const PostItem = () => {
         Co chuyen di sang mai tu Quan 1 ve Thu Duc, ai can di nho thi lien he
         0123456789
       </Text>
-      <View style={{left:10}}>
-          <View style={{flexDirection:"row"}}>
-            <Icon name="calendar" size={25} color='black' />
-            <Text style={{width:115,left:5}}>27/07/2022, 10h</Text>
-          </View>
-          <View style={{flexDirection:"row",marginVertical:5}}>
-            <Icon name="location" size={25} color="black" />
-            <Text style={{left:5,width:115}}>27/07/2022, 10h</Text>
-          </View>
-          <View style={{flexDirection:"row"}}>
-            <Icon1 name="my-location" size={25} color="black" />
-            <Text style={{width:115,left:5}}>27/07/2022, 1dddddddddddddddddddddd</Text>
-          </View>
+      <View style={{left: 10}}>
+        <View style={{flexDirection: 'row'}}>
+          <Icon name="calendar" size={25} color="black" />
+          <Text style={{width: 115, left: 5}}>27/07/2022, 10h</Text>
+        </View>
+        <View style={{flexDirection: 'row', marginVertical: 5}}>
+          <Icon name="location" size={25} color="black" />
+          <Text style={{left: 5, width: 115}}>27/07/2022, 10h</Text>
+        </View>
+        <View style={{flexDirection: 'row'}}>
+          <Icon1 name="my-location" size={25} color="black" />
+          <Text style={{width: 115, left: 5}}>
+            27/07/2022, 1dddddddddddddddddddddd
+          </Text>
+        </View>
       </View>
     </TouchableOpacity>
   );
@@ -36,6 +38,6 @@ const styles = StyleSheet.create({
     borderColor: '#6CC165',
     padding: 10,
     flexDirection: 'row',
-    marginHorizontal:10
+    marginHorizontal: 10,
   },
 });

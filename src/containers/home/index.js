@@ -94,7 +94,9 @@ export default function Home({navigation}) {
         </TouchableOpacity>
       </View>
       <TouchableOpacity style={{alignItems: 'center'}}>
-        <Image source={require('../../assets/image/advertise.png')} />
+        <Image source={require('../../assets/image/advertise.png')} 
+        style={{width:350}}
+        />
       </TouchableOpacity>
       <Text
         style={{
@@ -109,9 +111,10 @@ export default function Home({navigation}) {
       <View
         style={{
           borderRadius: 10,
-          marginHorizontal: 30,
           backgroundColor: color.greenop,
           height: 120,
+          width:350,
+          alignSelf:"center"
         }}>
         <View
           style={{
@@ -123,7 +126,6 @@ export default function Home({navigation}) {
           <View style={{alignItems: 'center', justifyContent: 'center'}}>
             <View
               style={{
-                backgroundColor: 'white',
                 height: 35,
                 width: 35,
                 justifyContent: 'center',
@@ -149,7 +151,9 @@ export default function Home({navigation}) {
               bottom: 10,
               alignItems: 'center',
               justifyContent: 'center',
-            }}>
+            }}
+            onPress={()=>{navigation.navigate('AddFeed')}}>
+            
             <View
               style={{
                 backgroundColor: color.green1,
@@ -161,14 +165,16 @@ export default function Home({navigation}) {
               }}>
               <View
                 style={{
-                  backgroundColor: 'white',
                   height: 35,
                   width: 35,
                   justifyContent: 'center',
                   alignItems: 'center',
                   borderRadius: 17.5,
                 }}>
-                <Icon1 name="like2" size={25} color="black" />
+                <Image
+                source={require('../../assets/image/feed.png')}
+                style={{width: 35, height: 35}}
+              />
               </View>
               <Text
                 style={{
@@ -185,7 +191,6 @@ export default function Home({navigation}) {
           <View style={{alignItems: 'center', justifyContent: 'center'}}>
             <View
               style={{
-                backgroundColor: 'white',
                 height: 35,
                 width: 35,
                 justifyContent: 'center',
@@ -193,13 +198,13 @@ export default function Home({navigation}) {
                 borderRadius: 17.5,
               }}>
               <Image
-                source={require('../../assets/image/request.png')}
+                source={require('../../assets/image/ride.png')}
                 style={{width: 25, height: 25}}
               />
             </View>
             <Text
               style={{textAlign: 'center', color: 'white', fontWeight: '700'}}>
-              All requests
+              Your rides
             </Text>
           </View>
         </View>

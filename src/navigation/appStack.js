@@ -9,14 +9,46 @@ import MyAccountScreen from '../containers/account/MyAccountScreen';
 import AddPost from '../containers/addpost/AddPost';
 import Rate from '../containers/addpost/Rate';
 import barnavigation from './barnavigation';
+import AddFeed from '../containers/home/AddFeed';
+import SearchFeed from '../containers/search';
+import DetailFeed from '../containers/home/DetailFeed';
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 export default function AppStack() {
   return (
     <Stack.Navigator>
       <Stack.Screen
-        name="Bar"
+        name="BarNavigation"
         component={barnavigation}
+        options={{
+          headerShown: false,
+        }}
+      />
+
+      <Stack.Screen
+        name="Home"
+        component={Home}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="AddFeed"
+        component={AddFeed}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="Search"
+        component={SearchFeed}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="DetailFeed"
+        component={DetailFeed}
         options={{
           headerShown: false,
         }}
