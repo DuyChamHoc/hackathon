@@ -4,8 +4,9 @@ import Home from '../containers/home';
 import {colors} from '../global/styles';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Icon1 from 'react-native-vector-icons/AntDesign';
+import Icon2 from 'react-native-vector-icons/Entypo';
 import MyAccountScreen from '../containers/account/MyAccountScreen';
-import SearchFeed from '../containers/search';
+import FeedScreen from '../containers/search/index';
 const Tab = createBottomTabNavigator();
 export default function barnavigation() {
   return (
@@ -26,14 +27,14 @@ export default function barnavigation() {
         }}
       />
       <Tab.Screen
-        name="Feeds"
-        component={SearchFeed}
+        name="feeds"
+        component={FeedScreen}
         options={{
           headerShown: false,
           title: 'Feeds',
           tabBarIcon: ({focussed, size}) => (
-            <Icon
-              name="newspaper-o"
+            <Icon2
+              name="text-document"
               color={focussed ? '#7cc' : colors.grey2}
               size={size}
             />

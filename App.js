@@ -6,7 +6,6 @@ import {LogBox} from 'react-native';
 import {SignInContextProvider} from './src/contexts/authContext';
 import Home from './src/containers/home';
 import { color } from './src/assets/colors/color';
-import AddFeed from './src/containers/home/AddFeed';
 import SearchFeed from './src/containers/search';
 LogBox.ignoreLogs(['new NativeEventEmitter']); // Ignore log notification by message
 LogBox.ignoreAllLogs(); //Ignore all log notifications
