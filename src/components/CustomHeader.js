@@ -5,7 +5,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import {color} from '../assets/colors/color';
 import {useNavigation} from '@react-navigation/native';
 
-export default function CustomHeader() {
+export default function CustomHeader({id}) {
   const navigation = useNavigation();
     return(
     <View
@@ -51,7 +51,7 @@ export default function CustomHeader() {
             styles.textab,
           
           ]}>
-          Add a new ride
+          {id===0?'Add a new ride':'Add new hitchhike'}
         </Text>
       </TouchableOpacity>
     </View>
@@ -77,7 +77,8 @@ const styles = StyleSheet.create({
     textab: {
       fontSize: 16,
       color: 'white',
-      width:110,
+      width:140,
+      alignSelf:"center",
       fontWeight: '600',
     },
   });

@@ -63,26 +63,43 @@ export default function SearchFeed() {
 
   return (
     <View>
-      <View
+    {/* //SEARCH */}
+    <View
+      style={{
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}>
+      <TextInput
         style={{
-          flexDirection: 'row',
-          backgroundColor: 'green',
-          height: 80,
-          alignItems: 'center',
-          justifyContent: 'space-between',
-        }}>
-        <TouchableOpacity
-          style={{
-            left: 10,
-            backgroundColor: 'white',
-            borderRadius: 22.5,
-            height: 45,
-            width: 45,
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}>
-          <Icon name="notifications" size={25} color={color.green} />
-        </TouchableOpacity>
+          height: 45,
+          borderWidth: 1,
+          marginHorizontal: 20,
+          borderRadius: 10,
+          marginVertical: 20,
+          width: 300,
+        }}
+        placeholder="Search"
+      />
+      <Icon1
+        name="search1"
+        size={30}
+        color={color.green}
+        style={{position: 'absolute', right: 0, marginRight: 75}}
+      />
+      <Icon1
+        name="filter"
+        size={30}
+        color={color.green}
+        style={{right: 5}}
+        onPress={() => setModavisible(!modavisible)}
+      />
+    </View>
+    <Modal
+      visible={modavisible}
+      transparent={true}
+      onRequestClose={() => setModavisible(!modavisible)}>
+      <TouchableOpacity onPress={() => setModavisible(!modavisible)}>
         <View
           style={{
             flexDirection: 'row',
@@ -94,6 +111,129 @@ export default function SearchFeed() {
             justifyContent: 'space-between',
             marginVertical: 10,
           }}>
+          <Text
+            style={{
+              fontSize: 16,
+              fontWeight: '700',
+              color: 'black',
+              left: 15,
+              marginVertical: 15,
+            }}>
+            Filter
+          </Text>
+          <View
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}>
+            <TouchableOpacity
+              style={{
+                height: 40,
+                backgroundColor:
+                  vehicle === 'Bike' ? color.green1 : 'white',
+                borderTopLeftRadius: 10,
+                borderBottomLeftRadius: 10,
+                width: 70,
+                justifyContent: 'center',
+                alignItems: 'center',
+                borderColor: color.green1,
+                borderWidth: 1,
+              }}
+              onPress={() => {
+                setVehicle('Bike');
+              }}>
+              <Text
+                style={{
+                  color: verhicale === 'Bike' ? 'white' : color.green1,
+                }}>
+                Bike
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={{
+                height: 40,
+                backgroundColor:
+                  verhicale !== 'Bike' ? color.green1 : 'white',
+                borderTopRightRadius: 10,
+                borderBottomRightRadius: 10,
+                left: 5,
+                Radius: 10,
+                width: 70,
+                justifyContent: 'center',
+                alignItems: 'center',
+                borderColor: color.green1,
+                borderWidth: 1,
+              }}
+              onPress={() => {
+                setVehicle('Car');
+              }}>
+              <Text
+                style={{
+                  color: vehicle !== 'Bike' ? 'white' : color.green1,
+                }}>
+                Car
+              </Text>
+            </TouchableOpacity>
+          </View>
+          <View style={{marginTop: 20}}>
+            <TouchableOpacity onPress={showDatepicker}>
+              <TextInput
+                style={{
+                  height: 40,
+                  borderWidth: 1,
+                  marginHorizontal: 20,
+                  borderRadius: 10,
+                  width: 220,
+                  alignSelf: 'center',
+                }}
+                selectTextOnFocus={false}
+                editable={false}
+                placeholder="Time range"
+              />
+            </TouchableOpacity>
+            {show && (
+              <DatetimePicker
+                testID="dateTimePicker"
+                value={date}
+                mode={mode}
+                is24Hour={true}
+                display="default"
+                onChange={onChange}
+              />
+            )}
+            <TouchableOpacity>
+              <TextInput
+                style={{
+                  height: 40,
+                  borderWidth: 1,
+                  marginHorizontal: 20,
+                  borderRadius: 10,
+                  marginVertical: 10,
+                  width: 220,
+                  alignSelf: 'center',
+                }}
+                selectTextOnFocus={false}
+                editable={false}
+                placeholder="Start location"
+              />
+            </TouchableOpacity>
+            <TouchableOpacity>
+              <TextInput
+                style={{
+                  height: 40,
+                  borderWidth: 1,
+                  marginHorizontal: 20,
+                  borderRadius: 10,
+                  width: 220,
+                  alignSelf: 'center',
+                }}
+                selectTextOnFocus={false}
+                editable={false}
+                placeholder="End location"
+              />
+            </TouchableOpacity>
+          </View>
           <TouchableOpacity
             style={[
               styles.tab,
@@ -129,47 +269,23 @@ export default function SearchFeed() {
             </Text>
           </TouchableOpacity>
         </View>
-        <TouchableOpacity
-          style={{right: 10}}
-          onPress={() => {
-            navigation.navigate('myaccount');
-          }}>
-          <Image
-            source={require('../../assets/image/avatar.jpg')}
-            style={{width: 45, height: 45, borderRadius: 25, marginLeft: 10}}
-          />
-        </TouchableOpacity>
-      </View>
-      {/* //SEARCH */}
-      <View
-        style={{
-          flexDirection: 'row',
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}>
-        <TextInput
-          style={{
-            height: 45,
-            borderWidth: 1,
-            marginHorizontal: 20,
-            borderRadius: 10,
-            marginVertical: 20,
-            width: 300,
-          }}
-          placeholder="Search"
-        />
-        <Icon1
-          name="search1"
-          size={30}
-          color={color.green}
-          style={{position: 'absolute', right: 0, marginRight: 75}}
-        />
-        <Icon1
-          name="filter"
-          size={30}
-          color={color.green}
-          style={{right: 5}}
-          onPress={() => setModavisible(!modavisible)}
+      </TouchableOpacity>
+    </Modal>
+    {/* OVERHERE */}
+    {feed.map((item, index) => (
+      <TouchableOpacity
+      style={{
+        borderWidth: 1,
+        borderRadius: 10,
+        borderColor: '#6CC165',
+        marginHorizontal: 10,
+        padding: 10,
+        marginTop: 5,
+      }}>
+      <View style={{flexDirection: 'row', right: 10}}>
+        <Image
+          source={require('../../assets/image/avatar.jpg')}
+          style={{width: 60, height: 60, borderRadius: 30}}
         />
       </View>
       <Modal
@@ -384,7 +500,7 @@ export default function SearchFeed() {
       ))}
     </View>
   );
-}
+};
 const styles = StyleSheet.create({
   tab: {
     height: 40,
