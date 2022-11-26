@@ -1,20 +1,14 @@
-import React from 'react';
+import React,{useState} from 'react';
 import {View, Text, StyleSheet, TouchableOpacity, Image, TextInput, ScrollView} from 'react-native';
 import {color} from '../../assets/colors/color';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Icon1 from 'react-native-vector-icons/Ionicons';
 import Icon2 from "react-native-vector-icons/MaterialIcons"
 import Icon3 from 'react-native-vector-icons/EvilIcons';
-import PostItem from '../../components/postItem';
 
-export default function DetailFeed() {
-  const data=[{
-    id:1,
-  },
-  {
-    id:2,
-  }
-]
+export default function DetailFeed({navigation,route}) {
+  const data=route.params;
+  const [comment,setcomment]=useState('')
   return (
     <ScrollView style={{marginVertical:30}}>
       <View
@@ -143,10 +137,13 @@ export default function DetailFeed() {
           </View>
           <View style={{marginVertical:30,flexDirection:"row"}}>
             <TextInput
+            onSubmitEditing={()=>{}}
             placeholder='Write your comment...'
             style={{backgroundColor:color.gray1,marginTop:20,width:"100%",borderRadius:10}}
+            value={comment}
+            onChangeText={(text)=>setcomment(text)}
             />
-             <Icon2
+            <Icon2
             name='arrow-forward-ios'
             size={25}
             color="black"
