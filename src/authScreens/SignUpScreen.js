@@ -168,11 +168,11 @@ const SignUpScreen = ({navigation}) => {
             <Animatable.View
               animation={passwordFocussed ? 'fadeInRight' : 'fadeInLeft'}
               duration={400}>
-              <Icon2 name="lock" size={20} />
+              <Icon2 name="lock" size={20} style={{marginLeft: 10}} />
             </Animatable.View>
             <TextInput
               placeholder="Password"
-              style={{flex: 1}}
+              style={{flex: 1, marginLeft: 15}}
               autoFocus={false}
               onChangeText={txt => setpassword(txt)}
               value={password}
@@ -183,6 +183,7 @@ const SignUpScreen = ({navigation}) => {
             />
             <Animatable.View duration={400}>
               <Icon3
+                style={{marginRight: 25}}
                 name={getVisible ? 'visibility' : 'visibility-off'}
                 size={20}
                 onPress={() => {
