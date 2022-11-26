@@ -21,7 +21,6 @@ import DatetimePicker from '@react-native-community/datetimepicker';
 
 const SignUpScreen = ({navigation}) => {
   const [passwordFocussed, setPasswordFocussed] = useState(false);
-  const [passwordBlured, setPasswordBlured] = useState(false);
   const [phonenumber, setphonenumber] = useState('');
   const [fullname, setfullname] = useState('');
   const [email, setemail] = useState('');
@@ -30,7 +29,6 @@ const SignUpScreen = ({navigation}) => {
   const [mode, setmode] = useState('date');
   const [show, setShow] = useState(false);
   const [getVisible, setVisible] = useState(false);
-  var dd = date.toDateString();
   const formattedDate =
     date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear();
   const onChange = (event, selectedDate) => {
@@ -119,7 +117,7 @@ const SignUpScreen = ({navigation}) => {
                 <TextInput
                   placeholder="Ngày sinh"
                   focusable={false}
-                  value={dd}
+                  value={formattedDate}
                 />
                 <Icon1
                   name="calendar"
@@ -177,9 +175,6 @@ const SignUpScreen = ({navigation}) => {
               value={password}
               onFocus={() => {
                 setPasswordFocussed(true);
-              }}
-              onBlur={() => {
-                setPasswordBlured(true);
               }}
               secureTextEntry={getVisible ? false : true}
             />
