@@ -17,15 +17,14 @@ import Header from '../components/Header';
 import * as Animatable from 'react-native-animatable';
 import {Formik} from 'formik';
 import {SignInContext} from '../contexts/authContext';
-// import auth, {firebase} from '@react-native-firebase/auth';
-// import firestore from '@react-native-firebase/firestore';
-// import {GoogleSignin} from '@react-native-google-signin/google-signin';
-// import {LoginManager, AccessToken} from 'react-native-fbsdk-next';
+import auth, {firebase} from '@react-native-firebase/auth';
+import firestore from '@react-native-firebase/firestore';
+import {GoogleSignin} from '@react-native-google-signin/google-signin';
 
-// GoogleSignin.configure({
-//   webClientId:
-//     '359199845323-h10e31djcqb9fbobv2vknmh1h1h5hge0.apps.googleusercontent.com',
-// });
+GoogleSignin.configure({
+  webClientId:
+    '98238674164-urf3dl5a63k4apui9ssd20qiaq0iial6.apps.googleusercontent.com',
+});
 export default function SignInScreen({navigation}) {
   const {dispatchSignedIn} = useContext(SignInContext);
   const [textinput2Fossued, setTextInput2Fossued] = useState(false);
@@ -34,86 +33,52 @@ export default function SignInScreen({navigation}) {
   const [getemail, setemail] = useState('');
   const [getVisible, setVisible] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
-  // async function signIn(data) {
-  //   try {
-  //     const {password, email} = data;
-  //     const user = await auth().signInWithEmailAndPassword(email, password);
-  //     if (user) {
-  //       firestore()
-  //         .collection('Users')
-  //         .doc(user.user.uid)
-  //         .get()
-  //         .then(documentSnapshot => {
-  //           dispatchSignedIn({
-  //             type: 'UPDATE_SIGN_IN',
-  //             payload: {userToken: documentSnapshot.data().roll},
-  //           });
-  //         });
-  //     }
-  //   } catch (error) {
-  //     Alert.alert(error.name, error.message);
-  //   }
-  // }
+  async function signIn(data) {
+    try {
+      const {password, email} = data;
+      const user = await auth().signInWithEmailAndPassword(email, password);
+      if (user) {
+        dispatchSignedIn({
+          type: 'UPDATE_SIGN_IN',
+          payload: {userToken: 'User'},
+        });
+      }
+    } catch (error) {
+      Alert.alert(error.name, error.message);
+    }
+  }
 
-  // async function onGoogleButtonPress() {
-  //   try {
-  //     const {idToken} = await GoogleSignin.signIn();
-  //     const googleCredential = auth.GoogleAuthProvider.credential(idToken);
-  //     const user = await auth().signInWithCredential(googleCredential);
-  //     if (user) {
-  //       dispatchSignedIn({
-  //         type: 'UPDATE_SIGN_IN',
-  //         payload: {userToken: 3},
-  //       });
-  //     }
-  //   } catch (error) {
-  //     Alert.alert(error.name, error.message);
-  //   }
-  // }
+  async function onGoogleButtonPress() {
+    try {
+      const {idToken} = await GoogleSignin.signIn();
+      const googleCredential = auth.GoogleAuthProvider.credential(idToken);
+      const user = await auth().signInWithCredential(googleCredential);
+      if (user) {
+        dispatchSignedIn({
+          type: 'UPDATE_SIGN_IN',
+          payload: {userToken: 'User'},
+        });
+      }
+    } catch (error) {
+      Alert.alert(error.name, error.message);
+    }
+  }
 
-  // async function onFacebookButtonPress() {
-  //   try {
-  //     const result = await LoginManager.logInWithPermissions([
-  //       'public_profile',
-  //       'email',
-  //     ]);
-
-  //     if (result.isCancelled) {
-  //       throw 'User cancelled the login process';
-  //     }
-  //     const data = await AccessToken.getCurrentAccessToken();
-  //     if (!data) {
-  //       throw 'Something went wrong obtaining access token';
-  //     }
-  //     const facebookCredential = auth.FacebookAuthProvider.credential(
-  //       data.accessToken,
-  //     );
-  //     const user = await auth().signInWithCredential(facebookCredential);
-  //     if (user) {
-  //       dispatchSignedIn({
-  //         type: 'UPDATE_SIGN_IN',
-  //         payload: {userToken: 3},
-  //       });
-  //     }
-  //   } catch (error) {
-  //     Alert.alert(error.name, error.message);
-  //   }
-  // }
-  // async function forgotPassword(Email) {
-  //   if (Email) {
-  //     firebase
-  //       .auth()
-  //       .sendPasswordResetEmail(Email)
-  //       .then(function (user) {
-  //         alert('Please check your email...');
-  //       })
-  //       .catch(function (e) {
-  //         console.log(e);
-  //       });
-  //   } else {
-  //     return;
-  //   }
-  // }
+  async function forgotPassword(Email) {
+    if (Email) {
+      firebase
+        .auth()
+        .sendPasswordResetEmail(Email)
+        .then(function (user) {
+          alert('Please check your email...');
+        })
+        .catch(function (e) {
+          console.log(e);
+        });
+    } else {
+      return;
+    }
+  }
   return (
     <>
       <View style={styles.container}>
@@ -223,7 +188,7 @@ export default function SignInScreen({navigation}) {
             <Text style={styles.createButtonTittle}>Sign up</Text>
           </TouchableOpacity>
         </View>
-        {/* <Modal
+        <Modal
           animationType="slide"
           transparent={true}
           visible={modalVisible}
@@ -257,25 +222,24 @@ export default function SignInScreen({navigation}) {
                   value={getemail}
                 />
               </View>
-              <Button
-                title="Send Email"
-                buttonStyle={{
+              <TouchableOpacity
+                onPress={() => {
+                  forgotPassword(getemail);
+                  setModalVisible(!modalVisible);
+                }}
+                style={{
                   alignContent: 'center',
                   borderRadius: 15,
                   height: 45,
                   width: 250,
                   backgroundColor: colors.blue,
                   marginLeft: 8,
-                }}
-                titleStyle={styles.buttonTitle}
-                onPress={() => {
-                  forgotPassword(getemail);
-                  setModalVisible(!modalVisible);
-                }}
-              />
+                }}>
+                <Text style={styles.buttonTitle}>Send Email</Text>
+              </TouchableOpacity>
             </View>
           </View>
-        </Modal> */}
+        </Modal>
       </View>
     </>
   );
