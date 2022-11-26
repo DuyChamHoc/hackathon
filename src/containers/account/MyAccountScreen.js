@@ -23,10 +23,17 @@ import {Picker} from '@react-native-picker/picker';
 import {Avatar} from 'react-native-paper';
 import {SignInContext} from '../../contexts/authContext';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
+import Icon3 from 'react-native-vector-icons/AntDesign';
+import Icon4 from 'react-native-vector-icons/Ionicons';
+import Icon5 from 'react-native-vector-icons/EvilIcons';
+import Icon6 from 'react-native-vector-icons/MaterialCommunityIcons';
+
+import {color} from '../../assets/colors/color';
 GoogleSignin.configure({
   webClientId:
     '98238674164-urf3dl5a63k4apui9ssd20qiaq0iial6.apps.googleusercontent.com',
 });
+// import { Icon } from 'react-native-paper/lib/typescript/components/Avatar/Avatar';
 export default function MyAccountScreen({navigation}) {
   const {dispatchSignedIn} = useContext(SignInContext);
   const [selectedValue, setSelectedValue] = useState('');
@@ -85,30 +92,30 @@ export default function MyAccountScreen({navigation}) {
     );
   };
 
-  useEffect(() => {
-    firestore()
-      .collection('Users')
-      .doc(user.uid)
-      .get()
-      .then(documentSnapshot => {
-        if (documentSnapshot.exists) {
-          setfullname(documentSnapshot.data().full_name);
-          setphonenumber(documentSnapshot.data().phone_number);
-          setdate(documentSnapshot.data().datetime);
-          setsex(documentSnapshot.data().sex);
-          setaddress(documentSnapshot.data().address);
-          setSelectedValue(documentSnapshot.data().sex);
-        }
-      });
-    if (count == 0) {
-      count = 1;
-      setfullname1(fullname);
-      setphonenumber1(phonenumber);
-      setdate1(date);
-      setsex1(sex);
-      setaddress1(address);
-    }
-  }, [getnum]);
+  // useEffect(() => {
+  //   firestore()
+  //     .collection('Users')
+  //     .doc(user.uid)
+  //     .get()
+  //     .then(documentSnapshot => {
+  //       if (documentSnapshot.exists) {
+  //         setfullname(documentSnapshot.data().full_name);
+  //         setphonenumber(documentSnapshot.data().phone_number);
+  //         setdate(documentSnapshot.data().datetime);
+  //         setsex(documentSnapshot.data().sex);
+  //         setaddress(documentSnapshot.data().address);
+  //         setSelectedValue(documentSnapshot.data().sex);
+  //       }
+  //     });
+  //   if (count == 0) {
+  //     count = 1;
+  //     setfullname1(fullname);
+  //     setphonenumber1(phonenumber);
+  //     setdate1(date);
+  //     setsex1(sex);
+  //     setaddress1(address);
+  //   }
+  // }, [getnum]);
 
   const update = () => {
     firestore()
@@ -172,71 +179,20 @@ export default function MyAccountScreen({navigation}) {
             <Avatar.Image
               size={100}
               source={{
-                uri: user.photoURL
-                  ? user.photoURL
-                  : 'https://i.ytimg.com/vi/jH7e1fDcZnY/maxresdefault.jpg',
+                uri: 'https://i.ytimg.com/vi/jH7e1fDcZnY/maxresdefault.jpg',
               }}
             />
-            <View style={{marginLeft: 90, marginTop: -20}}>
-              <Icon2
-                size={40}
-                name="camera"
-                onPress={() => {
-                  getCurrentImage();
-                }}
-                style={{color: colors.text}}
-              />
-            </View>
-            <Text style={{color: colors.text, fontSize: 20}}>
+
+            {/* <Text style={{color: colors.text, fontSize: 20}}>
               {user.displayName ? user.displayName : fullname}
-            </Text>
+            </Text> */}
           </View>
           <View
             style={{
               flexDirection: 'row',
               justifyContent: 'space-around',
               marginTop: 10,
-            }}>
-            <TouchableOpacity
-              onPress={() => {
-                firestore()
-                  .collection('order' + user.uid)
-                  .onSnapshot(snapshot => {});
-                navigation.navigate('MyOrderComplete');
-              }}
-              style={styles.viewItem}>
-              <Image
-                source={require('../../global/image/doc.png')}
-                style={{
-                  height: '100%',
-                  width: '25%',
-                  resizeMode: 'contain',
-                  marginRight: 5,
-                }}
-              />
-              <View style={{justifyContent: 'center', marginEnd: 5}}>
-                <Text style={{color: colors.text}}>{getorder}</Text>
-                <Text style={{color: colors.text}}>Đơn đang xử lý</Text>
-              </View>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.viewItem}
-              onPress={() => navigation.navigate('MyLastOrder')}>
-              <Image
-                source={require('../../global/image/history_cart.png')}
-                style={{
-                  height: '100%',
-                  width: '25%',
-                  resizeMode: 'contain',
-                  marginRight: 5,
-                }}
-              />
-              <View style={{justifyContent: 'center', marginEnd: 5}}>
-                <Text style={{color: colors.text}}>{getcomplete}</Text>
-                <Text style={{color: colors.text}}>Đơn đã mua</Text>
-              </View>
-            </TouchableOpacity>
-          </View>
+            }}></View>
         </View>
         <View
           style={{
@@ -253,14 +209,21 @@ export default function MyAccountScreen({navigation}) {
               marginLeft: 10,
               marginTop: 10,
             }}>
-            <Text
-              style={{color: colors.text, fontSize: 17, fontWeight: 'bold'}}>
-              Thông tin cá nhân
+            <Text style={{color: 'black', fontSize: 17, fontWeight: 'bold'}}>
+              Personal information
             </Text>
-            <TouchableOpacity onPress={createuser}>
-              <Text style={{fontSize: 15, fontWeight: 'bold', color: 'red'}}>
-                Sửa
-              </Text>
+
+            <TouchableOpacity
+              onPress={createuser}
+              style={{
+                borderRadius: 50,
+                backgroundColor: color.green,
+                width: 30,
+                height: 30,
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}>
+              <Icon3 name="edit" size={20} color="white" />
             </TouchableOpacity>
           </View>
           <Modal
@@ -308,7 +271,7 @@ export default function MyAccountScreen({navigation}) {
                     fontWeight: 'bold',
                     color: colors.text,
                   }}>
-                  Cập nhật thông tin
+                  Update
                 </Text>
                 <View style={{marginTop: 15}}>
                   <TextInput
@@ -437,19 +400,14 @@ export default function MyAccountScreen({navigation}) {
           </Modal>
           <View>
             <View style={styles.viewInfo}>
-              <Image
-                source={{
-                  uri: 'https://cdn2.iconfinder.com/data/icons/thin-line-color-1/21/38-256.png',
-                }}
-                style={{height: 30, width: 30, marginLeft: 20, marginTop: 5}}
-              />
+              <Icon4 name="person-outline" size={20} color={color.green} />
               <View
                 style={{
                   justifyContent: 'center',
                   marginEnd: 5,
                   marginLeft: 10,
                 }}>
-                <Text style={{color: colors.text}}>Tên người dùng</Text>
+                <Text style={{color: colors.text}}>Name</Text>
                 <Text style={{color: colors.text, marginTop: 5}}>
                   {fullname}
                 </Text>
@@ -458,19 +416,14 @@ export default function MyAccountScreen({navigation}) {
           </View>
           <View>
             <View style={styles.viewInfo}>
-              <Image
-                source={{
-                  uri: 'https://cdn3.iconfinder.com/data/icons/blue-line-interface/64/contact-256.png',
-                }}
-                style={{height: 30, width: 30, marginLeft: 20, marginTop: 5}}
-              />
+              <Icon3 name="phone" size={20} color={color.green} />
               <View
                 style={{
                   justifyContent: 'center',
                   marginEnd: 5,
                   marginLeft: 10,
                 }}>
-                <Text style={{color: colors.text}}>Số điện thoại</Text>
+                <Text style={{color: colors.text}}>Phone number</Text>
                 <Text style={{color: colors.text, marginTop: 5}}>
                   {phonenumber}
                 </Text>
@@ -479,38 +432,28 @@ export default function MyAccountScreen({navigation}) {
           </View>
           <View>
             <View style={styles.viewInfo}>
-              <Image
-                source={{
-                  uri: 'https://cdn4.iconfinder.com/data/icons/aircraft-blue-line/64/165_schedule-calendar-date-256.png',
-                }}
-                style={{height: 30, width: 30, marginLeft: 20, marginTop: 5}}
-              />
+              <Icon3 name="calendar" size={20} color={color.green} />
               <View
                 style={{
                   justifyContent: 'center',
                   marginEnd: 5,
                   marginLeft: 10,
                 }}>
-                <Text style={{color: colors.text}}>Ngày sinh</Text>
+                <Text style={{color: colors.text}}>Date of Birth</Text>
                 <Text style={{color: colors.text, marginTop: 5}}>{date}</Text>
               </View>
             </View>
           </View>
           <View>
             <View style={styles.viewInfo}>
-              <Image
-                source={{
-                  uri: 'https://cdn4.iconfinder.com/data/icons/lgbt-6/64/bigender-sex-gender-shapes-256.png',
-                }}
-                style={{height: 30, width: 30, marginLeft: 20, marginTop: 5}}
-              />
+              <Icon6 name="gender-male-female" size={25} color={color.green} />
               <View
                 style={{
                   justifyContent: 'center',
                   marginEnd: 5,
                   marginLeft: 10,
                 }}>
-                <Text style={{color: colors.text}}>Giới tính</Text>
+                <Text style={{color: colors.text}}>Gender</Text>
                 <Text style={{color: colors.text, marginTop: 5}}>{sex}</Text>
               </View>
             </View>
@@ -523,37 +466,36 @@ export default function MyAccountScreen({navigation}) {
               justifyContent: 'space-between',
               marginTop: 5,
             }}>
-            <Text
-              style={{
-                color: colors.text,
+            {/* <Text
+              style={{  
                 marginLeft: 15,
                 fontSize: 16,
-                fontWeight: 'bold',
               }}>
-              Địa chỉ
-            </Text>
+              Address
+            </Text> */}
           </View>
           <View style={{flexDirection: 'row', marginTop: 20}}>
-            <Image
-              source={{
-                uri: 'https://cdn4.iconfinder.com/data/icons/universal-7/614/17_-_Location-256.png',
-              }}
-              style={{height: 30, width: 30, marginLeft: 20, marginTop: 5}}
-            />
+            {/* <Icon5 name="location" size={30} color={color.green} /> */}
             <View style={{width: '85%', marginLeft: 5}}>
               <Text style={{fontSize: 16, color: colors.text}}>{address}</Text>
             </View>
           </View>
+
           <TouchableOpacity
             onPress={logout}
             style={{
-              height: '25%',
-              width: '40%',
-              justifyContent: 'flex-end',
-              alignItems: 'flex-end',
-              borderWidth: 1,
+              backgroundColor: color.green1,
+              height: 50,
+              justifyContent: 'center',
+              alignItems: 'center',
+              width: 150,
+              borderRadius: 15,
+              alignSelf: 'flex-end',
+              right: 25,
             }}>
-            <Text>Log out</Text>
+            <Text style={{color: 'white', fontWeight: '600', fontSize: 15}}>
+              Log out
+            </Text>
           </TouchableOpacity>
         </View>
       </ScrollView>
@@ -586,8 +528,9 @@ const styles = StyleSheet.create({
     borderWidth: 1,
   },
   viewInfo: {
+    paddingLeft:20,
     flexDirection: 'row',
-    marginTop: 20,
+    marginTop: 20,  
     alignContent: 'center',
   },
   address: {
