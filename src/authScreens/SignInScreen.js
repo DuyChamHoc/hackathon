@@ -9,7 +9,10 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import {colors} from '../global/styles';
+import Icon from 'react-native-vector-icons/Entypo';
 import Icon1 from 'react-native-vector-icons/FontAwesome';
+import Icon2 from 'react-native-vector-icons/MaterialCommunityIcons';
+import Icon3 from 'react-native-vector-icons/MaterialIcons';
 import Header from '../components/Header';
 import * as Animatable from 'react-native-animatable';
 import {Formik} from 'formik';
@@ -128,7 +131,7 @@ export default function SignInScreen({navigation}) {
             <View>
               <View style={{marginTop: 20}}>
                 <View style={styles.textinput2}>
-                  {/* <Icon name="email" color={colors.grey3} type="material" /> */}
+                  <Icon2 name="email" size={20} />
                   <TextInput
                     placeholder="Email"
                     ref={textinput1}
@@ -142,12 +145,7 @@ export default function SignInScreen({navigation}) {
                   <Animatable.View
                     animation={textinput2Fossued ? '' : 'fadeInLeft'}
                     duration={400}>
-                    {/* <Icon
-                      name="lock"
-                      iconStyle={{color: colors.grey3}}
-                      type="material"
-                      style={{}}
-                    /> */}
+                    <Icon name="lock" size={20} />
                   </Animatable.View>
                   <TextInput
                     autoCapitalize="none"
@@ -167,25 +165,23 @@ export default function SignInScreen({navigation}) {
                   <Animatable.View
                     animation={textinput2Fossued ? '' : 'fadeInLeft'}
                     duration={400}>
-                    {/* <Icon
+                    <Icon3
                       name={getVisible ? 'visibility' : 'visibility-off'}
-                      iconStyle={{color: colors.grey3, marginRight: 10}}
-                      type="material"
+                      size={20}
                       onPress={() => {
                         setVisible(!getVisible);
                       }}
-                    /> */}
+                    />
                   </Animatable.View>
                 </View>
               </View>
 
               <View style={{marginHorizontal: 20, marginTop: 10}}>
-                {/* <Button
-                  title="Login"
-                  buttonStyle={styles.styledButton}
-                  titleStyle={styles.buttonTitle}
-                  onPress={props.handleSubmit}
-                /> */}
+                <TouchableOpacity
+                  style={styles.styledButton}
+                  onPress={props.handleSubmit}>
+                  <Text style={styles.buttonTitle}>Login</Text>
+                </TouchableOpacity>
               </View>
             </View>
           )}
@@ -204,27 +200,14 @@ export default function SignInScreen({navigation}) {
           <Text style={{fontSize: 20, fontWeight: 'bold'}}>OR</Text>
         </View>
 
-        <View style={{marginHorizontal: 10, marginTop: -2}}>
-          {/* <SocialIcon
-            title="Login with Facebook"
-            button
-            type="facebook"
-            style={styles.SocialIcon}
-            onPress={() => {
-              onFacebookButtonPress();
-            }}
-          /> */}
-        </View>
         <View style={{marginHorizontal: 10, marginTop: 0}}>
-          {/* <SocialIcon
-            title="Login with Google"
-            button
-            type="google"
+          <TouchableOpacity
             style={styles.SocialIcon}
             onPress={() => {
               onGoogleButtonPress();
-            }}
-          /> */}
+            }}>
+            <Text>Login with Google</Text>
+          </TouchableOpacity>
         </View>
 
         <View style={{marginTop: 20, marginLeft: 20}}>
@@ -232,16 +215,15 @@ export default function SignInScreen({navigation}) {
         </View>
 
         <View style={{alignItems: 'flex-end', marginHorizontal: 20}}>
-          {/* <Button
-            title="Sign up"
-            buttonStyle={styles.createButton}
-            titleStyle={styles.createButtonTittle}
+          <TouchableOpacity
+            style={styles.createButton}
             onPress={() => {
               navigation.navigate('SignUpScreen');
-            }}
-          /> */}
+            }}>
+            <Text style={styles.createButtonTittle}>Sign up</Text>
+          </TouchableOpacity>
         </View>
-        <Modal
+        {/* <Modal
           animationType="slide"
           transparent={true}
           visible={modalVisible}
@@ -275,7 +257,7 @@ export default function SignInScreen({navigation}) {
                   value={getemail}
                 />
               </View>
-              {/* <Button
+              <Button
                 title="Send Email"
                 buttonStyle={{
                   alignContent: 'center',
@@ -290,10 +272,10 @@ export default function SignInScreen({navigation}) {
                   forgotPassword(getemail);
                   setModalVisible(!modalVisible);
                 }}
-              /> */}
+              />
             </View>
           </View>
-        </Modal>
+        </Modal> */}
       </View>
     </>
   );

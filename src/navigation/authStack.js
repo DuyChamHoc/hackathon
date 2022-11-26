@@ -2,7 +2,7 @@ import * as React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import SignInWelcomeScreen from '../authScreens/SignInWelcomeScreen';
 import SignInScreen from '../authScreens/SignInScreen';
-// import SignUpScreen from '../screens/authScreens/SignUpScreen';
+import SignUpScreen from '../authScreens/SignUpScreen';
 /** */
 
 const Stack = createNativeStackNavigator();
@@ -24,23 +24,13 @@ export default function AuthStack() {
           headerShown: false,
         }}
       />
-
-      {/* <Auth.Screen
-        name="SignInScreen"
-        component={SignInScreen}
-        options={{
-          headerShown: false,
-          ...TransitionPresets.RevealFromBottomAndroid,
-        }}
-      />
-      <Auth.Screen
+      <Stack.Screen
         name="SignUpScreen"
         component={SignUpScreen}
         options={{
           headerShown: false,
-          ...TransitionPresets.RevealFromBottomAndroid,
         }}
-      /> */}
+      />
     </Stack.Navigator>
   );
 }
