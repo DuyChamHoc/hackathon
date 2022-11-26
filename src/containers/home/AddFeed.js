@@ -17,7 +17,6 @@ export default function AddFeed({navigation}) {
     if (day != '') {
       return (
         Number(day.split('-')[2]) +
-        1 +
         ' tháng ' +
         day.split('-')[1] +
         ' năm ' +
@@ -29,15 +28,18 @@ export default function AddFeed({navigation}) {
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate || date;
     setShow(false);
-    setdate(currentDate);
+    //get the next day
+    let nextDay = new Date(currentDate);
+    nextDay.setDate(nextDay.getDate() + 1);
+    setdate(nextDay);
 
-    const temp = currentDate.toISOString().split('T')[0];
+    const temp = nextDay.toISOString().split('T')[0];
     setdateShow(formatDayShow(temp));
   };
   const onChangeTime = (event, selectedTime) => {
     setShow(false);
-   settimeShow(selectedTime.toLocaleTimeString());
-};
+    settimeShow(selectedTime.toLocaleTimeString());
+  };
   const showMode = currentMode => {
     setShow(true);
     setmode(currentMode);
@@ -188,6 +190,7 @@ export default function AddFeed({navigation}) {
             dateStart: date,
             timeStart: timeShow,
           };
+          console.log(data);
           navigation.navigate('AddPost', {data: data});
         }}
         style={{
