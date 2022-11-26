@@ -63,7 +63,86 @@ export default function SearchFeed() {
 
   return (
     <View>
+      <View
+        style={{
+          flexDirection: 'row',
+          backgroundColor: 'green',
+          height: 80,
+          alignItems: 'center',
+          justifyContent: 'space-between',
+        }}>
+        <TouchableOpacity
+          style={{
+            left: 10,
+            backgroundColor: 'white',
+            borderRadius: 22.5,
+            height: 45,
+            width: 45,
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}>
+          <Icon name="notifications" size={25} color={color.green} />
+        </TouchableOpacity>
+        <View
+          style={{
+            flexDirection: 'row',
+            backgroundColor: color.primarygreen,
+            width: 190,
+            height: 55,
+            borderRadius: 27.5,
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            marginVertical: 10,
+          }}>
+          <TouchableOpacity
+            style={[
+              styles.tab,
+              {left: 7.5},
+              tab === 0 ? {backgroundColor: 'white'} : null,
+            ]}
+            onPress={() => {
+              setTab(0);
+            }}>
+            <Text
+              style={[
+                styles.textab,
+                tab === 0 ? {color: color.primarygreen} : {color: 'white'},
+              ]}>
+              Rider
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={[
+              styles.tab,
+              {right: 7.5},
+              tab === 1 ? {backgroundColor: 'white'} : null,
+            ]}
+            onPress={() => {
+              setTab(1);
+            }}>
+            <Text
+              style={[
+                styles.textab,
+                tab === 1 ? {color: color.primarygreen} : {color: 'white'},
+              ]}>
+              Hitchhiker
+            </Text>
+          </TouchableOpacity>
+        </View>
+        <TouchableOpacity
+          style={{right: 10}}
+          onPress={() => {
+            navigation.navigate('myaccount');
+          }}>
+          <Image
+            source={require('../../assets/image/avatar.jpg')}
+            style={{width: 45, height: 45, borderRadius: 25, marginLeft: 10}}
+          />
+        </TouchableOpacity>
+      </View>
     {/* //SEARCH */}
+    {tab===0?
+    <View>
     <View
       style={{
         flexDirection: 'row',
@@ -145,7 +224,7 @@ export default function SearchFeed() {
               }}>
               <Text
                 style={{
-                  color: verhicale === 'Bike' ? 'white' : color.green1,
+                  color: vehicle === 'Bike' ? 'white' : color.green1,
                 }}>
                 Bike
               </Text>
@@ -154,7 +233,7 @@ export default function SearchFeed() {
               style={{
                 height: 40,
                 backgroundColor:
-                  verhicale !== 'Bike' ? color.green1 : 'white',
+                  vehicle !== 'Bike' ? color.green1 : 'white',
                 borderTopRightRadius: 10,
                 borderBottomRightRadius: 10,
                 left: 5,
@@ -495,9 +574,11 @@ export default function SearchFeed() {
               </View>
             </View>
           </View>
-        </TouchableOpacity>
-      ))}
-    </View>
+        </View>
+      </View>
+    </TouchableOpacity>
+    ))}
+  </View>
   );
 };
 const styles = StyleSheet.create({
