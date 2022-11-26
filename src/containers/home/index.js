@@ -7,6 +7,7 @@ import {
   PermissionsAndroid,
   Image,
   ScrollView,
+  FlatList,
 } from 'react-native';
 import Swiper from 'react-native-swiper';
 import {color} from '../../assets/colors/color';
@@ -16,8 +17,27 @@ import Icon3 from 'react-native-vector-icons/EvilIcons';
 import CurrentPosition from '../redux/CurrentPosition';
 import Geolocation from '@react-native-community/geolocation';
 import {useDispatch} from 'react-redux';
+import firestore from '@react-native-firebase/firestore';
 export default function Home({navigation}) {
   //get current position
+  const [getRider, setRider] = useState([]);
+  const [getHitch, setHitch] = useState([]);
+  useEffect(() => {
+    firestore()
+      .collection('Feeds')
+      .doc('FeedsRider')
+      .get()
+      .then(documentSnapshot => {
+        setRider(documentSnapshot.data().feeds);
+      });
+    firestore()
+      .collection('Feeds')
+      .doc('FeedsHitch')
+      .get()
+      .then(documentSnapshot => {
+        setHitch(documentSnapshot.data().feeds);
+      });
+  }, []);
 
   const dispatch = useDispatch();
   const requestLocation = async () => {
@@ -51,14 +71,73 @@ export default function Home({navigation}) {
           }),
         );
       },
-      error => alert(JSON.stringify(error)),
+      // error => alert(JSON.stringify(error)),
       {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000},
     );
   };
   useEffect(() => {
-    componentDidMount()
+    componentDidMount();
   }, []);
   const [tab, setTab] = useState(0);
+  const ListItem = ({item}) => {
+    return (
+      <View>
+        <TouchableOpacity
+          style={{
+            borderWidth: 1,
+            borderRadius: 10,
+            borderColor: '#6CC165',
+            marginHorizontal: 10,
+            padding: 10,
+            marginTop: 5,
+            backgroundColor: 'white',
+          }}>
+          <View style={{flexDirection: 'row', right: 10}}>
+            <Image
+              source={require('../../assets/image/avatar.jpg')}
+              style={{width: 60, height: 60, borderRadius: 30}}
+            />
+            <View>
+              <View style={{flexDirection: 'row', marginTop: 10}}>
+                <Text
+                  style={{
+                    fontSize: 15,
+                    fontWeight: '700',
+                    color: 'black',
+                  }}>
+                  Nguyen Van A
+                </Text>
+              </View>
+              <Text>2 hour ago</Text>
+            </View>
+            <View></View>
+          </View>
+          <View style={{flexDirection: 'row'}}>
+            <Text style={{width: 190}}>
+              Co chuyen di sang mai tu Quan 1 ve Thu Duc, ai can di nho thi lien
+              he 0123456789
+            </Text>
+            <View style={{left: 10}}>
+              <View style={{flexDirection: 'row'}}>
+                <Icon3 name="calendar" size={25} color="black" />
+                <Text style={{width: 115, left: 5}}>27/07/2022, 10h</Text>
+              </View>
+              <View style={{flexDirection: 'row', marginVertical: 5}}>
+                <Icon3 name="location" size={25} color="black" />
+                <Text style={{left: 5, width: 115}}>27/07/2022, 10h</Text>
+              </View>
+              <View style={{flexDirection: 'row'}}>
+                <Icon2 name="my-location" size={25} color="black" />
+                <Text style={{width: 115, left: 5}}>
+                  27/07/2022, 1dddddddddddddddddddddd
+                </Text>
+              </View>
+            </View>
+          </View>
+        </TouchableOpacity>
+      </View>
+    );
+  };
   return (
     requestLocation(),
     (
@@ -142,6 +221,52 @@ export default function Home({navigation}) {
         </View>
         {tab === 0 ? (
           <View>
+            <TouchableOpacity style={{alignItems: 'center'}}>
+              <View style={{height: 200}}>
+                <Swiper
+                  activeDot={
+                    <View
+                      style={{
+                        backgroundColor: color.green,
+                        width: 8,
+                        height: 8,
+                        borderRadius: 4,
+                        marginLeft: 3,
+                        marginRight: 3,
+                        marginTop: 3,
+                        marginBottom: 3,
+                      }}
+                    />
+                  }
+                  autoplay={true}
+                  style={{
+                    alignContent: 'center',
+                    marginLeft: 25,
+                    justifyContent: 'center',
+                    marginTop: 40,
+                    height: 170,
+                  }}>
+                  <View style={{height: 150, width: 348}}>
+                    <Image
+                      source={{uri: 'https://i.imgur.com/noRIECL.png'}}
+                      style={{height: '100%', width: '100%'}}
+                    />
+                  </View>
+                  <View style={{height: 150, width: 348}}>
+                    <Image
+                      source={{uri: 'https://i.imgur.com/xXb186h.png'}}
+                      style={{height: '100%', width: '100%'}}
+                    />
+                  </View>
+                  <View style={{height: 150, width: 348}}>
+                    <Image
+                      source={{uri: 'https://i.imgur.com/tPKSn8j.png'}}
+                      style={{height: '100%', width: '100%'}}
+                    />
+                  </View>
+                </Swiper>
+              </View>
+            </TouchableOpacity>
             <Text
               style={{
                 fontSize: 16,
@@ -275,68 +400,61 @@ export default function Home({navigation}) {
               Incoming rides
             </Text>
             <ScrollView style={{marginVertical: 10}}>
-              <TouchableOpacity
-                style={{
-                  borderWidth: 1,
-                  borderRadius: 10,
-                  borderColor: '#6CC165',
-                  marginHorizontal: 10,
-                  padding: 10,
-                  marginTop: 5,
-                  backgroundColor: 'white',
-                }}>
-                <View style={{flexDirection: 'row', right: 10}}>
-                  <Image
-                    source={require('../../assets/image/avatar.jpg')}
-                    style={{width: 60, height: 60, borderRadius: 30}}
-                  />
-                  <View>
-                    <View style={{flexDirection: 'row', marginTop: 10}}>
-                      <Text
-                        style={{
-                          fontSize: 15,
-                          fontWeight: '700',
-                          color: 'black',
-                        }}>
-                        Nguyen Van A
-                      </Text>
-                    </View>
-                    <Text>2 hour ago</Text>
-                  </View>
-                  <View></View>
-                </View>
-                <View style={{flexDirection: 'row'}}>
-                  <Text style={{width: 190}}>
-                    Co chuyen di sang mai tu Quan 1 ve Thu Duc, ai can di nho
-                    thi lien he 0123456789
-                  </Text>
-                  <View style={{left: 10}}>
-                    <View style={{flexDirection: 'row'}}>
-                      <Icon3 name="calendar" size={25} color="black" />
-                      <Text style={{width: 115, left: 5}}>27/07/2022, 10h</Text>
-                    </View>
-                    <View style={{flexDirection: 'row', marginVertical: 5}}>
-                      <Icon3 name="location" size={25} color="black" />
-                      <Text style={{left: 5, width: 115}}>27/07/2022, 10h</Text>
-                    </View>
-                    <View style={{flexDirection: 'row'}}>
-                      <Icon2 name="my-location" size={25} color="black" />
-                      <Text style={{width: 115, left: 5}}>
-                        27/07/2022, 1dddddddddddddddddddddd
-                      </Text>
-                    </View>
-                  </View>
-                </View>
-              </TouchableOpacity>
+              <FlatList
+                data={getRider}
+                renderItem={({item, index}) => <ListItem item={item} />}
+                contentContainerStyle={{paddingBottom: 100}}
+                showsVerticalScrollIndicator={false}
+              />
             </ScrollView>
           </View>
         ) : (
           <View>
             <TouchableOpacity style={{alignItems: 'center'}}>
-              <Image
-                source={require('../../assets/image/advertise1.png')}
-                style={{width: 350}}
-              />
+              <View style={{height: 200}}>
+                <Swiper
+                  activeDot={
+                    <View
+                      style={{
+                        backgroundColor: color.green,
+                        width: 8,
+                        height: 8,
+                        borderRadius: 4,
+                        marginLeft: 3,
+                        marginRight: 3,
+                        marginTop: 3,
+                        marginBottom: 3,
+                      }}
+                    />
+                  }
+                  autoplay={true}
+                  style={{
+                    alignContent: 'center',
+                    marginLeft: 25,
+                    justifyContent: 'center',
+                    marginTop: 40,
+                    height: 170,
+                  }}>
+                  <View style={{height: 150, width: 348}}>
+                    <Image
+                      source={{uri: 'https://i.imgur.com/VRhrkJM.png'}}
+                      style={{height: '100%', width: '100%'}}
+                    />
+                  </View>
+                  <View style={{height: 150, width: 348}}>
+                    <Image
+                      source={{uri: 'https://i.imgur.com/xXb186h.png'}}
+                      style={{height: '100%', width: '100%'}}
+                    />
+                  </View>
+                  <View style={{height: 150, width: 348}}>
+                    <Image
+                      source={{uri: 'https://i.imgur.com/tPKSn8j.png'}}
+                      style={{height: '100%', width: '100%'}}
+                    />
+                  </View>
+                </Swiper>
+              </View>
             </TouchableOpacity>
             <Text
               style={{
