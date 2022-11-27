@@ -42,7 +42,7 @@ const Allrequest = ({navigation}) => {
           <TouchableOpacity style={{right: 10}}>
             <Image
               source={require('../../assets/image/avatar.jpg')}
-              style={{width: 60, height: 60, borderRadius: 30}}
+              style={{width: 50, height: 50, borderRadius: 30}}
             />
           </TouchableOpacity>
           <View style={{marginTop: 5}}>
@@ -161,7 +161,7 @@ const Allrequest = ({navigation}) => {
         <TouchableOpacity style={{right: 10}}>
           <Image
             source={require('../../assets/image/avatar.jpg')}
-            style={{width: 60, height: 60, borderRadius: 30}}
+            style={{width: 50, height: 50, borderRadius: 30}}
           />
         </TouchableOpacity>
         <View style={{marginTop: 5}}>
@@ -200,7 +200,7 @@ const Allrequest = ({navigation}) => {
         <TouchableOpacity style={{right: 10}}>
           <Image
             source={require('../../assets/image/avatar.jpg')}
-            style={{width: 60, height: 60, borderRadius: 30}}
+            style={{width: 50, height: 50, borderRadius: 30}}
           />
         </TouchableOpacity>
         <View style={{marginTop: 5, marginRight:45}}>

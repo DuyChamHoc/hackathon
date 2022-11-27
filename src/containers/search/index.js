@@ -7,6 +7,7 @@ import {
   Image,
   TextInput,
   Modal,
+  ScrollView,
 } from 'react-native';
 import {color} from '../../assets/colors/color';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -69,9 +70,6 @@ export default function SearchFeed({navigation}) {
   //     setIsLoading(false);
   //   });
   // }, [tab]);
-
-  if (isLoading) 
-  return (<View><Text>Loading</Text></View>)
 
   return ( 
     <View>
@@ -351,6 +349,7 @@ export default function SearchFeed({navigation}) {
       </TouchableOpacity>
     </Modal>
     {/* OVERHERE */}
+    <ScrollView>
     {feed.map((item, index) => (
       <TouchableOpacity
       key={index}
@@ -363,7 +362,7 @@ export default function SearchFeed({navigation}) {
         marginTop: 5,
       }}
       onPress={()=>{
-        navigation.navigate('DetailFeed',{item,id});
+        navigation.navigate('DetailFeed',{item,tab});
       }}
       >
       <View style={{flexDirection: 'row', right: 10}}>
@@ -388,7 +387,7 @@ export default function SearchFeed({navigation}) {
         <View style={{left: 10}}>
           <View style={{flexDirection: 'row'}}>
             <Icon3 name="calendar" size={25} color="black" />
-            <Text style={{width: 115, left: 5}}>{item.dateStart.toDate().toDateString()}</Text>
+            <Text style={{width: 115, left: 5}}>{item.dateStart}</Text>
           </View>
           <View style={{flexDirection: 'row', marginVertical: 5}}>
             <Icon3 name="location" size={25} color="black" />
@@ -404,6 +403,7 @@ export default function SearchFeed({navigation}) {
       </View>
     </TouchableOpacity>
     ))}
+    </ScrollView>
     </View>
   </View>
   );

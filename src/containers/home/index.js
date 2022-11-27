@@ -95,7 +95,7 @@ export default function Home({navigation}) {
           <View style={{flexDirection: 'row', right: 10}}>
             <Image
               source={require('../../assets/image/avatar.jpg')}
-              style={{width: 60, height: 60, borderRadius: 30}}
+              style={{width: 50, height: 50, borderRadius: 30}}
             />
             <View>
               <View style={{flexDirection: 'row', marginTop: 10}}>
@@ -154,7 +154,7 @@ export default function Home({navigation}) {
           <View style={{flexDirection: 'row', right: 10}}>
             <Image
               source={require('../../assets/image/avatar.jpg')}
-              style={{width: 60, height: 60, borderRadius: 30}}
+              style={{width: 50, height: 50, borderRadius: 30}}
             />
             <View>
               <View style={{flexDirection: 'row', marginTop: 10}}>
