@@ -16,6 +16,7 @@ import Icon2 from 'react-native-vector-icons/Ionicons';
 import Icon3 from 'react-native-vector-icons/MaterialCommunityIcons';
 import Icon4 from 'react-native-vector-icons/Entypo';
 
+import {useSelector} from 'react-redux';
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 import MapView, {Marker} from 'react-native-maps';
@@ -30,8 +31,11 @@ const MAX_DOWNWARD_TRANSLATE_Y = 0;
 const DRAG_THRESHOLD = 50;
 
 export default function AddPost({navigation, route}) {
+  const user = auth().currentUser;
   const itemData = route.params.data;
-  const id=route.params.id;
+  const id = route.params.id;
+  const currentPos = useSelector(state => state.currentPosition);
+  console.log('currentPos', currentPos);
   //Bottom sheet
   const animatedValue = useRef(new Animated.Value(0)).current;
   const lastGestureDy = useRef(0);
@@ -87,8 +91,8 @@ export default function AddPost({navigation, route}) {
   };
 
   const [origin, setOrigin] = useState({
-    latitude: 10.8759637,
-    longitude: 106.7990858,
+    latitude: currentPos.latitude,
+    longitude: currentPos.longitude,
   });
   const [destination, setDestination] = useState({
     latitude: null,
@@ -135,6 +139,53 @@ export default function AddPost({navigation, route}) {
   const [isChooseShare, setIsChooseShare] = useState(false);
   const [isChooseFree, setIsChooseFree] = useState(false);
 
+  const [isExsistH, setIsExsistH] = useState(true);
+  useEffect(() => {
+    firestore()
+      .collection('Feeds')
+      .doc('FeedsHitch')
+      .get()
+      .then(documentSnapshot => {
+        setIsExsistH(documentSnapshot.exists);
+      });
+  });
+  const handleDoneHitch = () => {
+    let data = {
+      user: user.displayName,
+      _useruid: auth().currentUser.uid,
+      origin: origin,
+      destination: destination,
+      dateStart: itemData.dateStart,
+      timeStart: itemData.timeStart,
+      description: itemData.description,
+      destinationName: destinationName,
+      originName: name,
+      comment: [],
+    };
+    if (isExsistH) {
+      firestore()
+        .collection('Feeds')
+        .doc('FeedsHitch')
+        .update({
+          feeds: firestore.FieldValue.arrayUnion(data),
+        })
+        .then(() => {
+          console.log('Post added!xxx');
+        });
+    } else {
+      firestore()
+        .collection('Feeds')
+        .doc('FeedsHitch')
+        .set({
+          feeds: firestore.FieldValue.arrayUnion(data),
+        })
+        .then(() => {
+          console.log('Post added!');
+        });
+    }
+    navigation.navigate('Home');
+  };
+
   const handleNext = () => {
     if (destinationName === '') {
       ToastAndroid.show('Please enter destination', ToastAndroid.SHORT);
@@ -146,7 +197,7 @@ export default function AddPost({navigation, route}) {
   useEffect(() => {
     firestore()
       .collection('Feeds')
-      .doc(auth().currentUser.uid)
+      .doc('FeedsRider')
       .get()
       .then(documentSnapshot => {
         setIsExsist(documentSnapshot.exists);
@@ -154,6 +205,7 @@ export default function AddPost({navigation, route}) {
   });
   const handleDone = () => {
     let data = {
+      user: user.displayName,
       _useruid: auth().currentUser.uid,
       origin: origin,
       destination: destination,
@@ -165,11 +217,12 @@ export default function AddPost({navigation, route}) {
       options: isChooseTip ? 'tip' : isChooseShare ? 'share' : 'free',
       destinationName: destinationName,
       originName: name,
+      comment: [],
     };
     if (isExsist) {
       firestore()
         .collection('Feeds')
-        .doc(auth().currentUser.uid)
+        .doc('FeedsRider')
         .update({
           feeds: firestore.FieldValue.arrayUnion(data),
         })
@@ -179,7 +232,7 @@ export default function AddPost({navigation, route}) {
     } else {
       firestore()
         .collection('Feeds')
-        .doc(auth().currentUser.uid)
+        .doc('FeedsRider')
         .set({
           feeds: firestore.FieldValue.arrayUnion(data),
         })
@@ -187,6 +240,7 @@ export default function AddPost({navigation, route}) {
           console.log('Post added!');
         });
     }
+    navigation.navigate('Home');
   };
   const handleBack = () => {
     setIsShowChooseLocation(true);
@@ -316,7 +370,7 @@ export default function AddPost({navigation, route}) {
                   <TouchableOpacity
                     style={styles.btnNext}
                     onPress={() => {
-                      id===0? handleNext():null;
+                      id === 0 ? handleNext() : handleDoneHitch();
                     }}>
                     <Text
                       style={{
@@ -324,7 +378,7 @@ export default function AddPost({navigation, route}) {
                         fontSize: 14,
                         fontWeight: 'bold',
                       }}>
-                      {id===0?'Next':'Done'}
+                      {id === 0 ? 'Next' : 'Done'}
                     </Text>
                   </TouchableOpacity>
                 </View>
