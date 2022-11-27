@@ -384,7 +384,7 @@ export default function SearchFeed() {
         <View style={{left: 10}}>
           <View style={{flexDirection: 'row'}}>
             <Icon3 name="calendar" size={25} color="black" />
-            <Text numberOfLines={2} style={{width: 115, left: 5}}>{item.dateStart.toDate().toDateString()}</Text>
+            <Text numberOfLines={2} style={{width: 115, left: 5}}>{item.dateStart}</Text>
           </View>
           <View style={{flexDirection: 'row', marginVertical: 5}}>
             <Icon3 name="location" size={25} color="black" />

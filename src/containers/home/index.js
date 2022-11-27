@@ -120,17 +120,15 @@ export default function Home({navigation}) {
             <View style={{left: 10}}>
               <View style={{flexDirection: 'row'}}>
                 <Icon3 name="calendar" size={25} color="black" />
-                <Text style={{width: 115, left: 5}}>27/07/2022, 10h</Text>
+                <Text style={{width: 115, left: 5}}>27/07/2022</Text>
               </View>
               <View style={{flexDirection: 'row', marginVertical: 5}}>
                 <Icon3 name="location" size={25} color="black" />
-                <Text style={{left: 5, width: 115}}>27/07/2022, 10h</Text>
+                <Text style={{left: 5, width: 115}}>District 1, HCM City</Text>
               </View>
               <View style={{flexDirection: 'row'}}>
                 <Icon2 name="my-location" size={25} color="black" />
-                <Text style={{width: 115, left: 5}}>
-                  27/07/2022, 1dddddddddddddddddddddd
-                </Text>
+                <Text style={{width: 115, left: 5}}>GO Supermarket, Thu Duc, HCM City</Text>
               </View>
             </View>
           </View>
@@ -179,15 +177,15 @@ export default function Home({navigation}) {
             <View style={{left: 10}}>
               <View style={{flexDirection: 'row'}}>
                 <Icon3 name="calendar" size={25} color="black" />
-                <Text style={{width: 115, left: 5}}>27/07/2022, 10h</Text>
+                <Text style={{width: 115, left: 5}}>27/07/2022</Text>
               </View>
               <View style={{flexDirection: 'row', marginVertical: 5}}>
                 <Icon3 name="location" size={25} color="black" />
-                <Text style={{left: 5, width: 115}}>27/07/2022, 10h</Text>
+                <Text style={{left: 5, width: 115}}>District 1, HCM City</Text>
               </View>
               <View style={{flexDirection: 'row'}}>
                 <Icon2 name="my-location" size={25} color="black" />
-                <Text style={{width: 115, left: 5}}>27/07/2022</Text>
+                <Text style={{width: 115, left: 5}}>GO Supermarket, Thu Duc, HCM City</Text>
               </View>
             </View>
           </View>
