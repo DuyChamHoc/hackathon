@@ -95,9 +95,9 @@ export default function Home({navigation}) {
           <View style={{flexDirection: 'row', right: 10}}>
             <Image
               source={require('../../assets/image/avatar.jpg')}
-              style={{width: 50, height: 50, borderRadius: 30}}
+              style={{width: 50, height: 50, borderRadius: 30,left:10}}
             />
-            <View>
+            <View style={{marginLeft:20}}>
               <View style={{flexDirection: 'row', marginTop: 10}}>
                 <Text
                   style={{
@@ -113,24 +113,22 @@ export default function Home({navigation}) {
             <View></View>
           </View>
           <View style={{flexDirection: 'row'}}>
-            <Text style={{width: 190}}>
+            <Text style={{width: 190,top:10}}>
               Co chuyen di sang mai tu Quan 1 ve Thu Duc, ai can di nho thi lien
               he 0123456789
             </Text>
-            <View style={{left: 10}}>
+            <View style={{left: 10,top:10}}>
               <View style={{flexDirection: 'row'}}>
                 <Icon3 name="calendar" size={25} color="black" />
-                <Text style={{width: 115, left: 5}}>27/07/2022, 10h</Text>
+                <Text style={{width: 115, left: 5}}>27/07/2022</Text>
               </View>
               <View style={{flexDirection: 'row', marginVertical: 5}}>
                 <Icon3 name="location" size={25} color="black" />
-                <Text style={{left: 5, width: 115}}>27/07/2022, 10h</Text>
+                <Text style={{left: 5, width: 115}}>District 1, HCM City</Text>
               </View>
               <View style={{flexDirection: 'row'}}>
                 <Icon2 name="my-location" size={25} color="black" />
-                <Text style={{width: 115, left: 5}}>
-                  27/07/2022, 1dddddddddddddddddddddd
-                </Text>
+                <Text style={{width: 115, left: 5}}>GO Supermarket, Thu Duc, HCM City</Text>
               </View>
             </View>
           </View>
@@ -154,9 +152,9 @@ export default function Home({navigation}) {
           <View style={{flexDirection: 'row', right: 10}}>
             <Image
               source={require('../../assets/image/avatar.jpg')}
-              style={{width: 50, height: 50, borderRadius: 30}}
+              style={{width: 50, height: 50, borderRadius: 30,left:10}}
             />
-            <View>
+            <View style={{marginLeft:20}}>
               <View style={{flexDirection: 'row', marginTop: 10}}>
                 <Text
                   style={{
@@ -172,22 +170,22 @@ export default function Home({navigation}) {
             <View></View>
           </View>
           <View style={{flexDirection: 'row'}}>
-            <Text style={{width: 190}}>
+            <Text style={{width: 190,top:10}}>
               Co chuyen di sang mai tu Quan 1 ve Thu Duc, ai can di nho thi lien
               he 0123456789
             </Text>
-            <View style={{left: 10}}>
+            <View style={{left: 10,top:10}}>
               <View style={{flexDirection: 'row'}}>
                 <Icon3 name="calendar" size={25} color="black" />
-                <Text style={{width: 115, left: 5}}>27/07/2022, 10h</Text>
+                <Text style={{width: 115, left: 5}}>27/07/2022</Text>
               </View>
               <View style={{flexDirection: 'row', marginVertical: 5}}>
                 <Icon3 name="location" size={25} color="black" />
-                <Text style={{left: 5, width: 115}}>27/07/2022, 10h</Text>
+                <Text style={{left: 5, width: 115}}>District 1, HCM City</Text>
               </View>
               <View style={{flexDirection: 'row'}}>
                 <Icon2 name="my-location" size={25} color="black" />
-                <Text style={{width: 115, left: 5}}>27/07/2022</Text>
+                <Text style={{width: 115, left: 5}}>GO Supermarket, Thu Duc, HCM City</Text>
               </View>
             </View>
           </View>
@@ -558,7 +556,7 @@ export default function Home({navigation}) {
                 marginVertical: 10,
                 left: 15,
               }}>
-              Incoming rides
+              Incoming ride
             </Text>
             <ScrollView style={{marginVertical: 10}}>
               <FlatList

@@ -368,10 +368,10 @@ export default function SearchFeed({navigation}) {
       <View style={{flexDirection: 'row', right: 10}}>
         <Image
           source={require('../../assets/image/avatar.jpg')}
-          style={{width: 60, height: 60, borderRadius: 30}}
+          style={{width: 60, height: 60, borderRadius: 30, marginStart: 10}}
         />
         <View>
-          <View style={{flexDirection: 'row', marginTop: 10}}>
+          <View style={{flexDirection: 'row', marginTop: 10, marginLeft: 10}}>
             <Text style={{fontSize: 15, fontWeight: '700', color: 'black'}}>
               {item.user}
             </Text>
@@ -380,8 +380,8 @@ export default function SearchFeed({navigation}) {
         </View>
         <View></View>
       </View>
-      <View style={{flexDirection: 'row'}}>
-        <Text style={{width: 190}}>
+      <View style={{flexDirection: 'row', marginStart: 10, marginTop: 10}}>
+        <Text style={{width: 180}}>
           {item.description}
         </Text>
         <View style={{left: 10}}>
@@ -391,11 +391,11 @@ export default function SearchFeed({navigation}) {
           </View>
           <View style={{flexDirection: 'row', marginVertical: 5}}>
             <Icon3 name="location" size={25} color="black" />
-            <Text style={{left: 5, width: 115}}>{item.originName}</Text>
+            <Text numberOfLines={2} style={{left: 5, width: 115}}>{item.originName}</Text>
           </View>
           <View style={{flexDirection: 'row'}}>
             <Icon2 name="my-location" size={25} color="black" />
-            <Text style={{width: 115, left: 5}}>
+            <Text numberOfLines={2} style={{width: 115, left: 5}}>
               {item.destinationName}
             </Text>
           </View>
